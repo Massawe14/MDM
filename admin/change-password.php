@@ -30,24 +30,34 @@
     <!-- /.content-header -->
     <form action="code.php" method="POST">
         <div class="modal-body">
-          <div class="form-group">
-          <label for="">Old Password </label>
-          <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Old Password" required />
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">New Password </label>
-              <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New Password" required />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">Username </label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username" required />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">Old Password </label>
+                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Old Password" required />
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for=""> Confirm Password </label>
-              <input type="password" class="form-control" name="c_password" id="c_password" placeholder="Confirm Password" required />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">New Password </label>
+                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New Password" required />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for=""> Confirm Password </label>
+                <input type="password" class="form-control" name="c_password" id="c_password" placeholder="Confirm Password" required />
+              </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="modal-footer">
           <a href="index.php" class="btn btn-secondary">BACK</a>
