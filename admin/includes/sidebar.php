@@ -174,6 +174,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
+              <i class="nav-icon las la-sync"></i>
+              <p>
+                Image Processing
+              </p>
+            </a>
+          </li>
           <li class="nav-header">SETTINGS</li>
           <li class="nav-item has-treeview">
             <a href="index.php" class="nav-link">
