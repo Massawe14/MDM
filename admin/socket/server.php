@@ -1,6 +1,6 @@
 <?php
 
-  $host = "localhost";
+  $host = "192.168.137.158";
   $port = 20205;
 
   // No Timeout
@@ -25,11 +25,10 @@
     }
   }
 
-  do
-  {
+  do{
 
     // Make it to accept incoming connection
-    $accept = socket_accept($sock) or die("Could not accept incoming connection.\n");
+    $accept = socket_accept($sock) or die("Could not accept incoming connection.");
 
     // Read the message from the client socket
     $msg = socket_read($accept, 1024) or die("Could not read input\n");
@@ -44,29 +43,9 @@
     // Send message back to client socket
     socket_write($accept, $reply, strlen($reply)) or die("Could not write output\n");
 
-  }while (true);
+  }while (true); 
 
   // Close the socket
   socket_close($accept, $sock);
-
-  // while (true) {
-  //   // Start listening to the port
-  //   $result = socket_listen($sock, 3) or die("Could not set up socket listener\n");
-
-  //   // Make it to accept incoming connection
-  //   $spawn = socket_accept($sock) or die("Could not accept incoming connection\n");
-
-  //   // Read the message from the client socket
-  //   $input = socket_read($spawn, 1024) or die("Could not read input\n");
-
-  //   $output = 'I received your message.';
-
-  //   // Send message back to client socket
-  //   socket_write($spawn, $output, strlen($output)) or die("Could not write output\n");
-  // }
-
-  // Close the socket
-  // socket_close($spawn);
-  // socket_close($socket);
 
 ?>

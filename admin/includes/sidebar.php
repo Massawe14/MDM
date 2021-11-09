@@ -94,7 +94,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="index.php" class="nav-link">
-              <i class="nav-icon las la-tablet"></i>
+              <i class="nav-icon las la-desktop"></i>
               <p>
                 Device Management
                 <i class="right las la-caret-left"></i>
@@ -135,6 +135,41 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="index.php" class="nav-link">
+              <i class="nav-icon las la-clock"></i>
+              <p>
+                Session Management
+                <i class="right las la-caret-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addsession.php" class="nav-link">
+                  <i class="las la-plus nav-icon"></i>
+                  <p>Add Session</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="main-session.php" class="nav-link">
+                  <i class="las la-edit nav-icon"></i>
+                  <p>Edit Session</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="main-session.php" class="nav-link">
+                  <i class="las la-trash nav-icon"></i>
+                  <p>Remove Session</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="main-session.php" class="nav-link">
+                  <i class="las la-info-circle nav-icon"></i>
+                  <p>Session Info</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon las la-terminal"></i>
               <p>
                 Commands
@@ -156,12 +191,6 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                  <i class="las la-file-alt nav-icon"></i>
-                  <p>Logs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
                   <i class="las la-undo-alt nav-icon"></i>
                   <p>Restart</p>
                 </a>
@@ -174,9 +203,38 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="index.php" class="nav-link">
+              <i class="nav-icon las la-folder-open"></i>
+              <p>
+                Logs
+                <i class="las la-caret-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="main-session.php" class="nav-link">
+                  <i class="las la-stream nav-icon"></i>
+                  <p>Main Sessions</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="session-users.php" class="nav-link">
+                  <i class="las la-user-tag nav-icon"></i>
+                  <p>Session Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="session-logs.php" class="nav-link">
+                  <i class="las la-file-alt nav-icon"></i>
+                  <p>Session Logs</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
-              <i class="nav-icon las la-sync"></i>
+              <i class="nav-icon las la-images"></i>
               <p>
                 Image Processing
               </p>
@@ -185,7 +243,7 @@
           <li class="nav-header">SETTINGS</li>
           <li class="nav-item has-treeview">
             <a href="index.php" class="nav-link">
-              <i class="nav-icon las la-file-pdf"></i>
+              <i class="nav-icon las la-print"></i>
               <p>
                 Report
                 <i class="las la-caret-left right"></i>

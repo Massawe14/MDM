@@ -79,7 +79,7 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <?php 
-                  $query = "SELECT id FROM user ORDER BY id";
+                  $query = "SELECT sn FROM users ORDER BY sn";
                   $result = mysqli_query($conn, $query);
 
                   $row = mysqli_num_rows($result);
@@ -98,14 +98,19 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <?php 
+                  $query = "SELECT sn FROM session_logs ORDER BY sn";
+                  $result = mysqli_query($conn, $query);
 
-                <p>Logs</p>
+                  $row = mysqli_num_rows($result);
+                  echo '<h3>'.$row.'</h3>';
+                ?>
+                <p>Session Logs</p>
               </div>
               <div class="icon">
-                <i class="las la-file-alt"></i>
+                <i class="las la-folder-open"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="session-logs.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

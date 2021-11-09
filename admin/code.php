@@ -15,9 +15,9 @@
   // DEVICE
   if (isset($_POST['check_Devicebtn'])) {
 
-    $deviceID = $_POST['dev_id'];
+    $deviceID = $_POST['device_id'];
 
-    $checkdevice = "SELECT dev_id FROM device WHERE dev_id='$deviceID'";
+    $checkdevice = "SELECT device_id FROM devices WHERE device_id='$deviceID'";
     $checkdevice_result = mysqli_query($conn, $checkdevice);
 
     if (mysqli_num_rows($checkdevice_result) > 0) {
@@ -29,11 +29,10 @@
   }
 
   if (isset($_POST['addDevice'])) {
-    $dev_id = $_POST['dev_id'];
-    $dev_user = $_POST['dev_user'];
-    $dev_status = $_POST['dev_status'] == true ? '1':'0';
+    $device_id = $_POST['device_id'];
+    $name = $_POST['name'];
 
-    $device_query = "INSERT INTO `device` (`dev_id`, `dev_user`, `dev_status`) VALUES ('$dev_id', '$dev_user', '$dev_status')";
+    $device_query = "INSERT INTO `devices` (`device_id`, `name`) VALUES ('$device_id', '$name')";
     $device_query_result = mysqli_query($conn, $device_query);
 
     if ($device_query_result) {
@@ -47,12 +46,11 @@
   }
 
   if (isset($_POST['updateDevice'])) {
+    $sn = $_POST['sn'];
     $device_id = $_POST['device_id'];
-    $dev_id = $_POST['dev_id'];
-    $dev_user = $_POST['dev_user'];
-    $dev_status = $_POST['dev_status'] == true ? '1':'0';
+    $name = $_POST['name'];
 
-    $query = "UPDATE device SET dev_id='$dev_id', dev_user='$dev_user', dev_status='$dev_status' WHERE id='$device_id'";
+    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -66,9 +64,9 @@
   }
 
   if (isset($_POST['deleteDevice'])) {
-    $device_delete_id = $_POST['delete_dev_id'];
+    $device_delete_id = $_POST['delete_device_sn'];
 
-    $query = "DELETE FROM device WHERE id='$device_delete_id'";
+    $query = "DELETE FROM devices WHERE sn='$device_delete_id'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -106,8 +104,11 @@
     $password = $_POST['password'];
     $role_as = $_POST['role_as'];
     $confirmpassword = $_POST['confirmpassword'];
+    
+    // password encryption
+    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($password == $confirmpassword) {
+    if (password_verify($confirmpassword, $password_encrypt)) {
 
        $checkemail = "SELECT email FROM admin WHERE email='$adminemail'";
        $checkemail_result = mysqli_query($conn, $checkemail);
@@ -121,7 +122,7 @@
        else{
         // Now we have collected the form data in variables
         // Let's insert them to the table
-        $query = "INSERT INTO `admin`(`fname`, `lname`, `username`, `email`, `password`, `role_as`) VALUES ('$firstname', '$lastname', '$username', '$adminemail', '$password', '$role_as')";
+        $query = "INSERT INTO `admin`(`first_name`, `last_name`, `username`, `email`, `password_hash`, `role_as`) VALUES ('$firstname', '$lastname', '$username', '$adminemail', '$password_encrypt', '$role_as')";
         $result = mysqli_query($conn, $query); 
 
         if ($result) {
@@ -141,15 +142,18 @@
   }
 
   if (isset($_POST['updateAdmin'])) {
-    $id = $_POST['id'];
+    $sn = $_POST['sn'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
     $adminemail = $_POST['email'];
     $password = $_POST['password'];
     $role_as = $_POST['role_as'];
+    
+    // password encryption
+    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = "UPDATE `admin` SET fname='$firstname', lname='$lastname', username='$username', email='$adminemail', password='$password', role_as='$role_as' WHERE id=$id";
+    $query = "UPDATE `admin` SET first_name='$firstname', last_name='$lastname', username='$username', email='$adminemail', password_hash='$password_encrypt', role_as='$role_as' WHERE sn=$sn";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -165,7 +169,7 @@
   if (isset($_POST['DeleteAdminbtn'])) {
     $adminid = $_POST['delete_admin'];
 
-    $sql = "DELETE FROM admin WHERE id = '$adminid'";
+    $sql = "DELETE FROM admin WHERE sn = '$adminid'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -183,7 +187,7 @@
 
     $useremail = $_POST['email'];
 
-    $checkemail = "SELECT email FROM user WHERE email='$useremail'";
+    $checkemail = "SELECT email FROM users WHERE email='$useremail'";
     $checkemail_result = mysqli_query($conn, $checkemail);
 
     if (mysqli_num_rows($checkemail_result) > 0) {
@@ -204,6 +208,8 @@
     $password = $_POST['password'];
     $confirmpassword = $_POST['confirmpassword'];
 
+    // password encryption
+    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
     $allowed_extension = array('png','jpg','jpeg');
     $file_extension = pathinfo($image, PATHINFO_EXTENSION);
@@ -212,9 +218,9 @@
 
     $check = getimagesize($_FILES["image"]["tmp_name"]);
 
-    if ($password == $confirmpassword) {
+    if (password_verify($confirmpassword, $password_encrypt)) {
 
-       $checkemail = "SELECT email FROM user WHERE email='$useremail'";
+       $checkemail = "SELECT email FROM users WHERE email='$useremail'";
        $checkemail_result = mysqli_query($conn, $checkemail);
 
        if (mysqli_num_rows($checkemail_result) > 0) {
@@ -246,7 +252,7 @@
        else{
         // Now we have collected the form data in variables
         // Let's insert them to the table
-        $query = "INSERT INTO `user`(`fname`, `lname`, `username`, `email`, `image`, `password`) VALUES ('$firstname', '$lastname', '$username', '$useremail', '$filename', '$password')";
+        $query = "INSERT INTO `users`(`first_name`, `last_name`, `username`, `email`, `image`, `password_hash`) VALUES ('$firstname', '$lastname', '$username', '$useremail', '$filename', '$password_encrypt')";
         $result = mysqli_query($conn, $query); 
 
         if ($result) {
@@ -269,13 +275,16 @@
   }
 
   if (isset($_POST['updateUser'])) {
-    $id = $_POST['id'];
+    $sn = $_POST['sn'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
     $useremail = $_POST['email'];
     $image = $_FILES['image']['name'];
     $password = $_POST['password'];
+
+    // password encryption
+    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
     $allowed_extension = array('png','jpg','jpeg');
     $file_extension = pathinfo($image, PATHINFO_EXTENSION);
@@ -305,7 +314,7 @@
     //   exit(0);
     // }
     else{
-      $query = "UPDATE `user` SET fname='$firstname', lname='$lastname', username='$username', email='$useremail', image='$filename', password='$password' WHERE id=$id";
+      $query = "UPDATE `users` SET first_name='$firstname', last_name='$lastname', username='$username', email='$useremail', image='$filename', password_hash='$password_encrypt' WHERE sn=$sn";
       $result = mysqli_query($conn, $query);
 
       if ($result) {
@@ -325,7 +334,7 @@
   if (isset($_POST['DeleteUserbtn'])) {
     $userid = $_POST['delete_user'];
 
-    $sql = "DELETE FROM user WHERE id = '$userid'";
+    $sql = "DELETE FROM users WHERE sn = '$userid'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -337,5 +346,99 @@
       header("Location: registered.php");
     }
   }
+
+  // DELETE SESSION LOGS
+  if (isset($_POST['deleteSessionLogs'])) {
+    $sessionlogs_delete_sn = $_POST['delete_session_sn'];
+
+    $query = "DELETE FROM session_logs WHERE sn='$sessionlogs_delete_sn'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session Logs Deleted Successfully";
+      header('Location: session-logs.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Logs Deleting Failed";
+      header('Location: session-logs.php');
+    }
+  }
+
+  // DELETE MAIN SESSION
+  if (isset($_POST['deleteMainSession'])) {
+    $mainsession_delete_id = $_POST['delete_session_id'];
+
+    $query = "DELETE FROM main_sessions WHERE session_id='$mainsession_delete_id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session Deleted Successfully";
+      header('Location: main-session.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Deleting Failed";
+      header('Location: main-session.php');
+    }
+  }
+
+  // DELETE SESSION USERS
+  if (isset($_POST['deleteSessionUsers'])) {
+    $sessionuser_delete_id = $_POST['delete_sessionusers_id'];
+
+    $query = "DELETE FROM session_users WHERE session_id='$sessionuser_delete_id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session User Deleted Successfully";
+      header('Location: session-users.php');
+    }
+    else{
+      $_SESSION['status'] = "Session User Deleting Failed";
+      header('Location: session-users.php');
+    }
+  }
+
+  // CHANGE PASSWORD
+  // if (isset($_POST['changePassword'])) {
+
+  //   // there are no errors so let's get data from the form
+  //   $username = $_POST['username'];
+  //   $old_password = $_POST['old_password'];
+  //   $new_password = $_POST['new_password'];
+  //   $confirm_password = $_POST['confirm_password'];
+
+  //   // password encryption
+  //   $password_encrypt = password_hash($new_password, PASSWORD_DEFAULT);
+
+  //   $query = "SELECT password_hash FROM admin where username='$username'";
+  //   $result = mysqli_query($conn, $query);
+  //   $row = mysqli_num_rows($result)
+
+  //   if (password_verify($old_password, $row['password_hash'])) {
+
+  //     if (password_verify($confirm_password, $password_encrypt)) {
+
+  //       $query = "UPDATE `admin` SET password_hash='$password_encrypt' WHERE username=$username";
+  //       $result = mysqli_query($conn, $query);
+
+  //       if ($result) {
+  //         $_SESSION['status'] = "Password Changed Successfully";
+  //         header("Location: registeradmin.php");
+  //       }
+  //       else{
+  //         $_SESSION['status'] = "Password Changing Failed";
+  //         header("Location: change-password.php");
+  //       }
+  //     }
+  //     else{
+  //       $_SESSION['status'] = "Password and Confirm Password does not match";
+  //       header("Location: change-password.php");
+  //     }
+  //   }
+  //   else{
+  //     $_SESSION['status'] = "Incorrect Old Password";
+  //     header("Location: change-password.php");
+  //   }
+  // }
 
 ?>

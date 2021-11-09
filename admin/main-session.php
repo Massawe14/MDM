@@ -21,7 +21,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Registered Users</li>
+              <li class="breadcrumb-item active">Registered Sessions</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,62 +30,29 @@
     <!-- /.content-header -->
 
     <!-- User Modal -->
-    <div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddSessionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Session</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form action="code.php" method="POST" enctype="multipart/form-data">
           <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">First Name</label>
-                  <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required/>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for=""> Last Name </label>
-                  <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required/>
-                </div>
-              </div>
+            <div class="form-group">
+              <label for=""> Session ID </label>
+              <input type="text" class="form-control" name="session_id" id="session_id" placeholder="Session ID" required/>
             </div>
             <div class="form-group">
-              <label for=""> UserName </label>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required/>
-            </div>
-            <div class="form-group">
-              <label for=""> Email </label>
-              <span class="email_error text-danger ml-2"></span>
-              <input type="email" class="form-control email_id" name="email" id="email" placeholder="Email"required/>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for=""> Password </label>
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for=""> Confirm Password </label>
-                  <input type="password" class="form-control" name="confirmpassword" id="password" placeholder="Confirm Password" required />
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for=""> Image </label>
-              <input type="file" class="form-control" name="image" id="image" placeholder="Image" required/>
+              <label for=""> Session Name </label>
+              <input type="text" class="form-control" name="session_name" id="session_name" placeholder="Session Name" required/>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="adduser" class="btn btn-primary">Save</button>
+            <button type="submit" name="addsession" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
@@ -93,25 +60,25 @@
     </div>
 
     <!-- Delete User -->
-    <div class="modal fade" id="DeleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel"aria-hidden="true">
+    <div class="modal fade" id="DeleteSessionModal" tabindex="-1" aria-labelledby="exampleModalLabel"aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Delete Session</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <form action="code.php" method="POST">
             <div class="modal-body">
-              <input type="hidden" name="delete_user" class="delete_user_id">
+              <input type="hidden" name="delete_session" class="delete_session_id">
               <p>
                 Are you sure. you want to delete this data ?
               </p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" name="DeleteUserbtn" class="btn btn-danger">Yes, Delete</button>
+              <button type="submit" name="DeleteSessionbtn" class="btn btn-danger">Yes, Delete</button>
             </div>
           </form>
         </div>
@@ -131,47 +98,37 @@
             ?>
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Registered User</h3>
-                <a href="#" data-toggle="modal" data-target="#AddUserModal" class="btn btn-primary btn-sm float-right">Add User</a>
+                <h3 class="card-title">Registered Sessions</h3>
+                <a href="#" data-toggle="modal" data-target="#AddSessionModal" class="btn btn-primary btn-sm float-right">Add Session</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>SN</th>
-                      <th>ID</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Image</th>
-                      <!-- <th>Password_hash</th> -->
-                      <th>Action</th>
+                      <th>Session ID</th>
+                      <th>Session Name</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
-                      $query = "SELECT * FROM users";
+                      $query = "SELECT * FROM main_sessions";
                       $result = mysqli_query($conn, $query); 
 
                       if (mysqli_num_rows($result) > 0) {
                         foreach ($result as $row) {
                           ?>
                             <tr>
-                              <td><?php  echo $row['sn']; ?></td>
-                              <td><?php  echo $row['id']; ?></td>
-                              <td><?php  echo $row['first_name']; ?></td>
-                              <td><?php  echo $row['last_name']; ?></td>
-                              <td><?php  echo $row['username']; ?></td>
-                              <td><?php  echo $row['email']; ?></td>
+                              <td><?php  echo $row['session_id']; ?></td>
+                              <td><?php  echo $row['name']; ?></td>
+                              <td><?php  echo $row['start_time']; ?></td>
+                              <td><?php  echo $row['end_time']; ?></td>
                               <td>
-                                <img src="<?php echo "uploads/images/".$row['image']; ?>" width="100px" alt="image">
-                              </td>
-                              <!-- <td><?php  echo $row['password_hash']; ?></td> -->
-                              <td>
-                                <a href="editUser.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
-                                <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deleteuserbtn">Delete</button>
+                                <a href="#?session_id=<?php echo $row['session_id']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <button type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-danger btn-sm deletesessionbtn">Delete</button>
                               </td>
                             </tr>
                           <?php
@@ -223,11 +180,11 @@
 <script>
   $(document).ready(function () {
 
-    $('.deleteuserbtn').click(function (e) {
+    $('.deletesessionbtn').click(function (e) {
       e.preventDefault();
       var user_id = $(this).val();
-      $('.delete_user_id').val(user_id);
-      $('#DeleteUserModal').modal('show');
+      $('.delete_Session_id').val(user_id);
+      $('#DeleteSessionModal').modal('show');
     });
 
   });

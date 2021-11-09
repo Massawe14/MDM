@@ -28,71 +28,90 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form action="code.php" method="POST">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="">First Name</label>
-              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required/>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for=""> Last Name </label>
-              <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required/>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for=""> UserName </label>
-              <input type="text" class="form-control" name="username" id="username" placeholder="Username" required/>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label>Select Role</label>
-              <?php 
-                $query = "SELECT * FROM `groups`";
-                $result = mysqli_query($conn, $query);
 
-                if (mysqli_num_rows($result) > 0) {
-                  ?>
-                    <select name="role_as" class="form-control">
-                      <?php foreach ($result as $row) { ?>
-                        <option value="<?= $row['group_name']; ?>"><?= $row['group_name']; ?></option>
-                      <?php } ?>
-                    </select>
-                  <?php
-                }  
-              ?>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for=""> Email </label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email"required/>
-        </div>
+    <section class="content mt-4">
+      <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for=""> Password </label>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
+          <div class="col-md-12">
+            <?php include('message.php'); ?>
+            <div class="card">
+              <div class="card-header">
+                <h4>
+                  Add Admin
+                </h4>
+              </div>
+              <div class="card-body">
+                <form action="code.php" method="POST">
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="">First Name</label>
+                          <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required/>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for=""> Last Name </label>
+                          <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for=""> UserName </label>
+                          <input type="text" class="form-control" name="username" id="username" placeholder="Username" required/>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Select Role</label>
+                          <?php 
+                            $query = "SELECT * FROM `groups`";
+                            $result = mysqli_query($conn, $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                              ?>
+                                <select name="role_as" class="form-control">
+                                  <?php foreach ($result as $row) { ?>
+                                    <option value="<?= $row['group_name']; ?>"><?= $row['group_name']; ?></option>
+                                  <?php } ?>
+                                </select>
+                              <?php
+                            }  
+                          ?>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for=""> Email </label>
+                      <input type="email" class="form-control" name="email" id="email" placeholder="Email"required/>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for=""> Password </label>
+                          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for=""> Confirm Password </label>
+                          <input type="password" class="form-control" name="confirmpassword" id="password" placeholder="Confirm Password" required />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="index.php" class="btn btn-secondary">BACK</a>
+                      <button type="submit" name="addAdmin" class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for=""> Confirm Password </label>
-              <input type="password" class="form-control" name="confirmpassword" id="password" placeholder="Confirm Password" required />
-            </div>
-          </div>
         </div>
-        </div>
-        <div class="modal-footer">
-          <a href="index.php" class="btn btn-secondary">BACK</a>
-          <button type="submit" name="addAdmin" class="btn btn-primary">Change</button>
-        </div>
-      </form>
+      </div>
+    </section>
   </div>
 
 <?php include('includes/script.php'); ?>

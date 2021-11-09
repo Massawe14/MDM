@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Add Device</li>
+              <li class="breadcrumb-item active">Add Sessions</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,38 +36,24 @@
           <div class="card">
             <div class="card-header">
               <h4>
-                Add Device
+                Add Session
               </h4>
             </div>
             <div class="card-body">
               <form action="code.php" method="POST">
                 <div class="modal-body">
                   <div class="form-group">
-                    <label>Device ID</label>
-                    <?php 
-                      $query = "SELECT * FROM session_logs";
-                      $result = mysqli_query($conn, $query);
-
-                      if (mysqli_num_rows($result) > 0) {
-                        ?>
-                          <select name="device_id" class="form-control">
-                            <?php foreach ($result as $row) { ?>
-                              <option value="<?= $row['device_id'] ?>"><?= $row['device_id'] ?></option>
-                            <?php } ?>
-                          </select>
-                        <?php
-                      } 
-                    ?>
+                    <label for=""> Session ID </label>
+                    <input type="text" class="form-control" name="session_id" id="session_id" placeholder="Session ID" required/>
                   </div>
                   <div class="form-group">
-                    <label for="">Device Name</label>
-                    <span class="device_error text-danger ml-2"></span>
-                    <input type="text" name="dev_id" class="form-control device_Id" required>
+                    <label for=""> Session Name </label>
+                    <input type="text" class="form-control" name="session_name" id="session_name" placeholder="Session Name" required/>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <a href="index.php" class="btn btn-secondary">BACK</a>
-                  <button type="submit" name="addDevice" class="btn btn-primary">Save</button>
+                  <button type="submit" name="addSession" class="btn btn-primary">Save</button>
                 </div>
               </form>
             </div> 

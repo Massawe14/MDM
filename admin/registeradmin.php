@@ -148,7 +148,7 @@
             ?>
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Registered Admin</h3>
+                <h3 class="card-title">Registered Admins</h3>
                 <a href="#" data-toggle="modal" data-target="#AddAdminModal" class="btn btn-primary btn-sm float-right">Add Admin</a>
               </div>
               <!-- /.card-header -->
@@ -156,7 +156,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>SN</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Username</th>
@@ -175,16 +175,16 @@
                         foreach ($result as $row) {
                           ?>
                             <tr>
-                              <td><?php  echo $row['id']; ?></td>
-                              <td><?php  echo $row['fname']; ?></td>
-                              <td><?php  echo $row['lname']; ?></td>
+                              <td><?php  echo $row['sn']; ?></td>
+                              <td><?php  echo $row['first_name']; ?></td>
+                              <td><?php  echo $row['last_name']; ?></td>
                               <td><?php  echo $row['username']; ?></td>
                               <td><?php  echo $row['email']; ?></td>
                               <td><?php echo $row['role_as']; ?></td>
-                              <!-- <td><?php  echo $row['password']; ?></td> -->
+                              <!-- <td><?php  echo $row['password_hash']; ?></td> -->
                               <td>
-                                <a href="editAdmin.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-sm">Edit</a>
-                                <button type="button" value="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm deleteadminbtn">Delete</button>
+                                <a href="editAdmin.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deleteadminbtn">Delete</button>
                               </td>
                             </tr>
                           <?php

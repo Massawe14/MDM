@@ -43,22 +43,22 @@
                   <form action="code.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                       <?php
-                        if (isset($_GET['id'])) {
-                          $id = $_GET['id'];
-                          $query = "SELECT * FROM user WHERE id='$id' LIMIT 1";
+                        if (isset($_GET['sn'])) {
+                          $sn = $_GET['sn'];
+                          $query = "SELECT * FROM users WHERE sn='$sn' LIMIT 1";
                           $result = mysqli_query($conn, $query);
 
                           if (mysqli_num_rows($result) > 0) {
                             foreach ($result as $row) {
                               ?>
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                <input type="hidden" name="sn" value="<?php echo $row['sn']; ?>">
                                 <div class="form-group">
                                   <label for="">First Name</label>
-                                  <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required value="<?php echo $row['fname']; ?>" />
+                                  <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required value="<?php echo $row['first_name']; ?>" />
                                 </div>
                                 <div class="form-group">
                                   <label for=""> Last Name </label>
-                                  <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required value="<?php echo $row['lname']; ?>" />
+                                  <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last Name" required value="<?php echo $row['last_name']; ?>" />
                                 </div>
                                 <div class="form-group">
                                   <label for=""> UserName </label>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label for=""> Password </label>
-                                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" required value="<?php echo $row['password']; ?>" />
+                                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" required value="<?php echo $row['password_hash']; ?>" />
                                 </div>
                                 <div class="form-group">
                                   <label for=""> Image </label>

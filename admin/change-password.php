@@ -40,7 +40,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Old Password </label>
-                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Old Password" required />
+                <input type="password" class="form-control" name="old_password" id="oldpassword" placeholder="Old Password" required />
               </div>
             </div>
           </div>
@@ -48,13 +48,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">New Password </label>
-                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New Password" required />
+                <input type="password" class="form-control" name="new_password" id="newpassword" placeholder="New Password" required />
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for=""> Confirm Password </label>
-                <input type="password" class="form-control" name="c_password" id="c_password" placeholder="Confirm Password" required />
+                <input type="password" class="form-control" name="confirm_password" id="c_password" placeholder="Confirm Password" required />
               </div>
             </div>
           </div>
