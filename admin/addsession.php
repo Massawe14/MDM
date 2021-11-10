@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Add Sessions</li>
+              <li class="breadcrumb-item active">Add Main Sessions</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,7 +36,7 @@
           <div class="card">
             <div class="card-header">
               <h4>
-                Add Session
+                Add Main Session
               </h4>
             </div>
             <div class="card-body">
@@ -48,7 +48,7 @@
                   </div>
                   <div class="form-group">
                     <label for=""> Session Name </label>
-                    <input type="text" class="form-control" name="session_name" id="session_name" placeholder="Session Name" required/>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Session Name" required/>
                   </div>
                 </div>
                 <div class="modal-footer">

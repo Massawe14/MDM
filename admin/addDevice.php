@@ -60,9 +60,8 @@
                     ?>
                   </div>
                   <div class="form-group">
-                    <label for="">Device Name</label>
-                    <span class="device_error text-danger ml-2"></span>
-                    <input type="text" name="dev_id" class="form-control device_Id" required>
+                    <label for=""> Device Name </label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Device Name" required/>
                   </div>
                 </div>
                 <div class="modal-footer">

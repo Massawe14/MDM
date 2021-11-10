@@ -6,6 +6,7 @@
   include('includes/topbar.php');
   include('includes/sidebar.php');
   include('config/dbconn.php');
+  require_once('includes/socket_client.php');
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -77,14 +78,14 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete Admin</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Delete Device</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <form action="code.php" method="POST">
             <div class="modal-body">
-              <input type="hidden" name="delete_device_sn" class="delete_device">
+              <input type="hidden" name="delete_device" class="delete_device_id">
               <p>
                 Are you sure. you want to delete this data ?
               </p>
@@ -128,6 +129,8 @@
                       <th>Location Lat</th>
                       <th>Location Long</th>
                       <th>Last Used</th>
+                      <th>Location</th>
+                      <th>Turn off</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -162,6 +165,12 @@
                               <td><?php echo $row['location_lng']; ?></td>
                               <td><?php echo $row['last_used']; ?></td>
                               <td>
+                                <a href="#" class="btn btn-success btn-sm">View</a>
+                              </td>
+                              <td>
+                                <button onclick="Send();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
+                              </td>
+                              <td>
                                 <a href="device-edit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deletedevicebtn">Delete</button>
                               </td>
@@ -190,39 +199,25 @@
 <?php include('includes/script.php'); ?>
 
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
 
-    $('.admin_email').keyup(function (e) {
-      var adminemail = $('.admin_email').val();
-
-      $.ajax({
-        type: "POST",
-        url: "code.php",
-        data: {
-          'check_Emailbtn':1,
-          'email':adminemail,
-        },
-        success: function (response) {
-          $('.email_error').text(response);
-        }
-      });
-
+    $('.deletedevicebtn').click(function (e) {
+      e.preventDefault();
+      var device_id = $(this).val();
+      $('.delete_device_id').val(device_id);
+      $('#DeleteDeviceModal').modal('show');
     });
 
   });
 </script>
 
 <script>
-  $(document).ready(function () {
-
-    $('.deletedevicebtn').click(function (e) {
-      e.preventDefault();
-      var device_sn = $(this).val();
-      $('.delete_device_sn').val(device_sn);
-      $('#DeleteDeviceModal').modal('show');
-    });
-
-  });
+  function Send() {
+    var device_id = $("#device_id").val();
+    console.log("Device ID :", device_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "TURN_OFF"}}});
+    window.dispatchEvent(event);
+}
 </script>
 
 <?php include('includes/footer.php'); ?>

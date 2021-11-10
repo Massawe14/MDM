@@ -1,5 +1,5 @@
 <?php
-
+  
   include('authentication.php');
   include('config/dbconn.php');
   
@@ -63,14 +63,19 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53</h3>
+                <?php 
+                  $query = "SELECT sn FROM main_sessions ORDER BY sn";
+                  $result = mysqli_query($conn, $query);
 
-                <p>Message Notification</p>
+                  $row = mysqli_num_rows($result);
+                  echo '<h3>'.$row.'</h3>';
+                ?>
+                <p>Sessions</p>
               </div>
               <div class="icon">
-                <i class="las la-sms"></i>
+                <i class="las la-clock"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="main-session.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

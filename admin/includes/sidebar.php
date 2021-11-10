@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="index.php" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon las la-user-shield"></i>
               <p>
                 Admin Management
@@ -35,18 +35,6 @@
                 <a href="addadmin.php" class="nav-link">
                   <i class="las la-plus-square nav-icon"></i>
                   <p>Add Admin</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="registeradmin.php" class="nav-link">
-                  <i class="las la-edit nav-icon"></i>
-                  <p>Edit Admin</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="registeradmin.php" class="nav-link">
-                  <i class="las la-trash nav-icon"></i>
-                  <p>Remove Admin</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -74,18 +62,6 @@
               </li>
               <li class="nav-item">
                 <a href="registered.php" class="nav-link">
-                  <i class="las la-edit nav-icon"></i>
-                  <p>Edit User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="registered.php" class="nav-link">
-                  <i class="las la-trash nav-icon"></i>
-                  <p>Remove User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="registered.php" class="nav-link">
                   <i class="las la-info-circle nav-icon"></i>
                   <p>User Info</p>
                 </a>
@@ -93,7 +69,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="index.php" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon las la-desktop"></i>
               <p>
                 Device Management
@@ -105,18 +81,6 @@
                 <a href="addDevice.php" class="nav-link">
                   <i class="las la-plus nav-icon"></i>
                   <p>Add Device</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="device.php" class="nav-link">
-                  <i class="las la-edit nav-icon"></i>
-                  <p>Edit Device</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="device.php" class="nav-link">
-                  <i class="las la-trash nav-icon"></i>
-                  <p>Remove Device</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -145,25 +109,25 @@
               <li class="nav-item">
                 <a href="addsession.php" class="nav-link">
                   <i class="las la-plus nav-icon"></i>
-                  <p>Add Session</p>
+                  <p>Add Main Session</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="addUserSession.php" class="nav-link">
+                  <i class="las la-plus-square nav-icon"></i>
+                  <p>Add User Session</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="main-session.php" class="nav-link">
-                  <i class="las la-edit nav-icon"></i>
-                  <p>Edit Session</p>
+                  <i class="las la-info nav-icon"></i>
+                  <p>Main Session Info</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="main-session.php" class="nav-link">
-                  <i class="las la-trash nav-icon"></i>
-                  <p>Remove Session</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="main-session.php" class="nav-link">
+                <a href="session-users.php" class="nav-link">
                   <i class="las la-info-circle nav-icon"></i>
-                  <p>Session Info</p>
+                  <p>Users Session Info</p>
                 </a>
               </li>
             </ul>
@@ -184,19 +148,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="las la-sms nav-icon"></i>
-                  <p>Sms Notification</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="restart.php" class="nav-link">
                   <i class="las la-undo-alt nav-icon"></i>
                   <p>Restart</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="shutdown.php" class="nav-link">
                   <i class="las la-power-off nav-icon"></i>
                   <p>Shutdown</p>
                 </a>
@@ -212,18 +170,6 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="main-session.php" class="nav-link">
-                  <i class="las la-stream nav-icon"></i>
-                  <p>Main Sessions</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="session-users.php" class="nav-link">
-                  <i class="las la-user-tag nav-icon"></i>
-                  <p>Session Users</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="session-logs.php" class="nav-link">
                   <i class="las la-file-alt nav-icon"></i>

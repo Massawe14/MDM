@@ -6,17 +6,17 @@
   	$username = $_POST['username'];
   	$password = $_POST['password'];
 
-  	$query = "SELECT * FROM admin WHERE username='$username' AND password='$password' LIMIT 1";
+  	$query = "SELECT * FROM admin WHERE username='$username' AND password_hash='$password' LIMIT 1";
   	$result = mysqli_query($conn, $query);
 
   	if (mysqli_num_rows($result) > 0) {
   		foreach ($result as $row) {
   			$admin_id = $row['id'];
-  			$admin_firstname = $row['fname'];
-  			$admin_lastname = $row['lastname'];
+  			$admin_firstname = $row['first_name'];
+  			$admin_lastname = $row['last_name'];
   			$admin_username = $row['username'];
   			$admin_email = $row['email'];
-  			$admin_password = $row['password'];
+  			$admin_password = $row['password_hash'];
         $role_as = $row['role_as'];
   		}
 

@@ -13,21 +13,6 @@
   }
 
   // DEVICE
-  if (isset($_POST['check_Devicebtn'])) {
-
-    $deviceID = $_POST['device_id'];
-
-    $checkdevice = "SELECT device_id FROM devices WHERE device_id='$deviceID'";
-    $checkdevice_result = mysqli_query($conn, $checkdevice);
-
-    if (mysqli_num_rows($checkdevice_result) > 0) {
-      echo "Device Already Exists";
-    }
-    else{
-      echo "It's Available";
-    }
-  }
-
   if (isset($_POST['addDevice'])) {
     $device_id = $_POST['device_id'];
     $name = $_POST['name'];
@@ -63,8 +48,8 @@
     }
   }
 
-  if (isset($_POST['deleteDevice'])) {
-    $device_delete_id = $_POST['delete_device_sn'];
+  if (isset($_POST['DeleteDevicebtn'])) {
+    $device_delete_id = $_POST['delete_device_id'];
 
     $query = "DELETE FROM devices WHERE sn='$device_delete_id'";
     $result = mysqli_query($conn, $query);
@@ -77,6 +62,19 @@
       $_SESSION['status'] = "Device Deleting Failed";
       header('Location: device.php');
     }
+  }
+
+  if (isset($_POST['turnoffDevice'])) {
+    $sn = $_POST['sn'];
+    $device_id = $_POST['device_id'];
+    $name = $_POST['name'];
+
+    echo '<script type="text/javascript">',
+            'var event = new CustomEvent("php-event", {channelId: "$device_id", message: {command: "TURN_OFF"}});',
+            'window.dispatchEvent(event);',
+          '</script>'
+    ;
+    //header('Location: device.php');
   }
 
   // ADMIN
@@ -364,11 +362,28 @@
     }
   }
 
-  // DELETE MAIN SESSION
-  if (isset($_POST['deleteMainSession'])) {
+  // MAIN SESSION
+  if (isset($_POST['addSession'])) {
+    $session_id = $_POST['session_id'];
+    $name = $_POST['name'];
+
+    $query = "INSERT INTO `main_sessions` (`session_id`, `name`) VALUES ('$session_id', '$name')";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session added Successfully";
+      header('Location: main-session.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Insertion Failed";
+      header('Location: main-session.php');
+    }
+  }
+
+  if (isset($_POST['DeleteSessionbtn'])) {
     $mainsession_delete_id = $_POST['delete_session_id'];
 
-    $query = "DELETE FROM main_sessions WHERE session_id='$mainsession_delete_id'";
+    $query = "DELETE FROM main_sessions WHERE sn='$mainsession_delete_id'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -381,7 +396,25 @@
     }
   }
 
-  // DELETE SESSION USERS
+  // SESSION USERS
+  if (isset($_POST['addUsersession'])) {
+    $session_id = $_POST['session_id'];
+    $user_id = $_POST['user_id'];
+    $device_id = $_POST['device_id'];
+
+    $device_query = "INSERT INTO `session_users` (`session_id`, `user_id`, `device_id`) VALUES ('$session_id', '$user_id', '$device_id')";
+    $device_query_result = mysqli_query($conn, $device_query);
+
+    if ($device_query_result) {
+      $_SESSION['status'] = "Session added Successfully";
+      header('Location: session-users.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Insertion Failed";
+      header('Location: session-users.php');
+    }
+  }
+
   if (isset($_POST['deleteSessionUsers'])) {
     $sessionuser_delete_id = $_POST['delete_sessionusers_id'];
 
