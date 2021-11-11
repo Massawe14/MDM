@@ -2,7 +2,7 @@
   session_start();
   include('config/dbconn.php');
 
-  if (isset($_POST['login_btn'])) {
+  if (isset($_POST['loginbtn'])) {
   	$username = $_POST['username'];
   	$password = $_POST['password'];
 
@@ -39,7 +39,7 @@
         header('Location: admin.php');
       }
       else{
-        $_SESSION['status'] = "Unauthorized";
+        $_SESSION['status'] = "You are not Authorized";
         header('Location: login.php');
       }
   	}

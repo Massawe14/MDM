@@ -44,7 +44,7 @@
               </div>
               <hr>
               <div class="form-group">
-                <button type="submit" name="login_btn" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" name="loginbtn" class="btn btn-primary btn-block">Login</button>
               </div>
             </form>
           </div>
