@@ -102,6 +102,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
+                    <th>SN</th>
                     <th>Session ID</th>
                     <th>User ID</th>
                     <th>Device ID</th>
@@ -117,12 +118,13 @@
                       foreach ($result as $row) {
                         ?>
                           <tr>
+                            <td><?= $row['sn']; ?></td>
                             <td><?= $row['session_id']; ?></td>
                             <td><?= $row['user_id']; ?></td>
                             <td><?= $row['device_id']; ?></td>
                             <td>
                               <form action="code.php" method="POST">
-                                <a href="#?session_id=<?php echo $row['session_id']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <a href="editUserSession.php?session_id=<?php echo $row['session_id']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <input type="hidden" name="delete_sessionusers_id" value="<?= $row['session_id']; ?>">
                                 <button type="submit" name="deleteSessionUsers" class="btn btn-danger btn-sm">
                                   Delete

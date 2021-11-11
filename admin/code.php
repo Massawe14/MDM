@@ -64,19 +64,6 @@
     }
   }
 
-  if (isset($_POST['turnoffDevice'])) {
-    $sn = $_POST['sn'];
-    $device_id = $_POST['device_id'];
-    $name = $_POST['name'];
-
-    echo '<script type="text/javascript">',
-            'var event = new CustomEvent("php-event", {channelId: "$device_id", message: {command: "TURN_OFF"}});',
-            'window.dispatchEvent(event);',
-          '</script>'
-    ;
-    //header('Location: device.php');
-  }
-
   // ADMIN
   if (isset($_POST['check_Emailbtn'])) {
 
@@ -427,6 +414,25 @@
     }
     else{
       $_SESSION['status'] = "Session User Deleting Failed";
+      header('Location: session-users.php');
+    }
+  }
+
+  if (isset($_POST['updateUserSession'])) {
+    $sn = $_POST['sn'];
+    $session_id = $_POST['session_id'];
+    $user_id = $_POST['user_id'];
+    $device_id = $_POST['device_id'];
+
+    $query = "UPDATE session_users SET session_id='$session_id', user_id='$user_id', device_id='$device_id' WHERE sn='$sn";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "User Session Updated Successfully";
+      header('Location: session-users.php');
+    }
+    else{
+      $_SESSION['status'] = "User Session Updating Failed";
       header('Location: session-users.php');
     }
   }

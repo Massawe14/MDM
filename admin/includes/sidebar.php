@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon las la-user-shield"></i>
               <p>
                 Admin Management
@@ -69,7 +69,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="index.php" class="nav-link">
               <i class="nav-icon las la-desktop"></i>
               <p>
                 Device Management
@@ -148,13 +148,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="restart.php" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="las la-undo-alt nav-icon"></i>
                   <p>Restart</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="shutdown.php" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="las la-power-off nav-icon"></i>
                   <p>Shutdown</p>
                 </a>

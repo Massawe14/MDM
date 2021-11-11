@@ -6,6 +6,7 @@
   include('includes/topbar.php');
   include('includes/sidebar.php');
   include('config/dbconn.php');
+  require_once('includes/socket_client.php');
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -112,6 +113,7 @@
                       <th>Start Time</th>
                       <th>End Time</th>
                       <th>Actions</th>
+                      <th>Commands</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -131,6 +133,10 @@
                               <td>
                                 <a href="#?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deletesessionbtn">Delete</button>
+                              </td>
+                              <td>
+                                <button onclick="Restart();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
+                                <button onclick="TurnOff();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
                               </td>
                             </tr>
                           <?php
@@ -167,6 +173,15 @@
     });
 
   });
+</script>
+
+<script>
+  function TurnOff() {
+    var session_id = $("#session_id").val();
+    console.log("Session ID :", session_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-session-message", message: {sessionId: session_id, command: "TURN_OFF"}}});
+    window.dispatchEvent(event);
+}
 </script>
 
 <?php include('includes/footer.php'); ?>

@@ -130,8 +130,8 @@
                       <th>Location Long</th>
                       <th>Last Used</th>
                       <th>Location</th>
-                      <th>Turn off</th>
                       <th>Actions</th>
+                      <th>Commands</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -168,11 +168,12 @@
                                 <a href="#" class="btn btn-success btn-sm">View</a>
                               </td>
                               <td>
-                                <button onclick="Send();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
-                              </td>
-                              <td>
                                 <a href="device-edit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deletedevicebtn">Delete</button>
+                              </td>
+                              <td>
+                                <button onclick="Restart();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
+                                <button onclick="TurnOff();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
                               </td>
                             </tr>
                           <?php
@@ -212,7 +213,7 @@
 </script>
 
 <script>
-  function Send() {
+  function TurnOff() {
     var device_id = $("#device_id").val();
     console.log("Device ID :", device_id);
     var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "TURN_OFF"}}});
