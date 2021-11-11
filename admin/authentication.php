@@ -1,5 +1,6 @@
 <?php  
   session_start();
+  // header("Refresh: 60");
 
   if (!isset($_SESSION['auth'])) {
   	$_SESSION['auth_status'] = "Login to Access Dashboard";
