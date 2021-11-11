@@ -367,7 +367,7 @@
     }
   }
 
-  if (isset($_POST['DeleteSessionbtn'])) {
+  if (isset($_POST['DeleteMainSessionbtn'])) {
     $mainsession_delete_id = $_POST['delete_session_id'];
 
     $query = "DELETE FROM main_sessions WHERE sn='$mainsession_delete_id'";
@@ -384,7 +384,7 @@
   }
 
   // SESSION USERS
-  if (isset($_POST['addUsersession'])) {
+  if (isset($_POST['addUserSession'])) {
     $session_id = $_POST['session_id'];
     $user_id = $_POST['user_id'];
     $device_id = $_POST['device_id'];
@@ -405,7 +405,7 @@
   if (isset($_POST['deleteSessionUsers'])) {
     $sessionuser_delete_id = $_POST['delete_sessionusers_id'];
 
-    $query = "DELETE FROM session_users WHERE session_id='$sessionuser_delete_id'";
+    $query = "DELETE FROM session_users WHERE sn='$sessionuser_delete_id'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

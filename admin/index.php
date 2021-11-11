@@ -44,7 +44,7 @@
             <div class="small-box bg-info">
               <div class="inner">
                 <?php 
-                  $query = "SELECT id FROM device ORDER BY id";
+                  $query = "SELECT sn FROM devices ORDER BY sn";
                   $result = mysqli_query($conn, $query);
 
                   $row = mysqli_num_rows($result);

@@ -79,7 +79,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" name="DeleteSessionbtn" class="btn btn-danger">Yes, Delete</button>
+              <button type="submit" name="DeleteMainSessionbtn" class="btn btn-danger">Yes, Delete</button>
             </div>
           </form>
         </div>
@@ -113,7 +113,7 @@
                       <th>Start Time</th>
                       <th>End Time</th>
                       <th>Actions</th>
-                      <th>Commands</th>
+                      <!-- <th>Commands</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -131,12 +131,12 @@
                               <td><?php  echo $row['start_time']; ?></td>
                               <td><?php  echo $row['end_time']; ?></td>
                               <td>
-                                <a href="#?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
-                                <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deletesessionbtn">Delete</button>
-                              </td>
-                              <td>
-                                <button onclick="Restart();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
-                                <button onclick="TurnOff();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
+                                <form action="code.php" method="POST">
+                                  <a href="editMainSession.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                  <button type="submit" name="deleteMainSessionUsers" class="btn btn-danger btn-sm">
+                                   Delete
+                                  </button>
+                                </form>
                               </td>
                             </tr>
                           <?php
@@ -167,21 +167,12 @@
 
     $('.deletesessionbtn').click(function (e) {
       e.preventDefault();
-      var sn = $(this).val();
-      $('.delete_Session_id').val(sn);
+      var session_id = $(this).val();
+      $('.delete_session_id').val(session_id);
       $('#DeleteSessionModal').modal('show');
     });
 
   });
-</script>
-
-<script>
-  function TurnOff() {
-    var session_id = $("#session_id").val();
-    console.log("Session ID :", session_id);
-    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-session-message", message: {sessionId: session_id, command: "TURN_OFF"}}});
-    window.dispatchEvent(event);
-}
 </script>
 
 <?php include('includes/footer.php'); ?>

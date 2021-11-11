@@ -11,7 +11,7 @@
 
   	if (mysqli_num_rows($result) > 0) {
   		foreach ($result as $row) {
-  			$admin_id = $row['id'];
+  			$admin_id = $row['sn'];
   			$admin_firstname = $row['first_name'];
   			$admin_lastname = $row['last_name'];
   			$admin_username = $row['username'];

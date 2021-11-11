@@ -213,10 +213,28 @@
 </script>
 
 <script>
+  function Restart() {
+    var device_id = $("#device_id").val();
+    console.log("Device ID :", device_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "RESTART"}}});
+    window.dispatchEvent(event);
+}
+</script>
+
+<script>
   function TurnOff() {
     var device_id = $("#device_id").val();
     console.log("Device ID :", device_id);
     var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "TURN_OFF"}}});
+    window.dispatchEvent(event);
+}
+</script>
+
+<script>
+  function TurnOff() {
+    var device_id = $("#device_id").val();
+    console.log("Device ID :", device_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-all", message: {deviceId: device_id, command: "TURN_OFF"}}});
     window.dispatchEvent(event);
 }
 </script>

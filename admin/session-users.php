@@ -5,6 +5,7 @@
   include('includes/header.php');
   include('includes/topbar.php');
   include('includes/sidebar.php');
+  require_once('includes/socket_client.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -107,6 +108,7 @@
                     <th>User ID</th>
                     <th>Device ID</th>
                     <th>Actions</th>
+                    <th>Commands</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,12 +126,16 @@
                             <td><?= $row['device_id']; ?></td>
                             <td>
                               <form action="code.php" method="POST">
-                                <a href="editUserSession.php?session_id=<?php echo $row['session_id']; ?>" class="btn btn-info btn-sm">Edit</a>
-                                <input type="hidden" name="delete_sessionusers_id" value="<?= $row['session_id']; ?>">
+                                <a href="editUserSession.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <input type="hidden" name="delete_sessionusers_id" value="<?= $row['sn']; ?>">
                                 <button type="submit" name="deleteSessionUsers" class="btn btn-danger btn-sm">
                                   Delete
                                 </button>
                               </form>
+                            </td>
+                            <td>
+                              <button onclick="Restart();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
+                              <button onclick="TurnOff();" id="session_id" type="button" value="<?php echo $row['session_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
                             </td>
                           </tr>
                         <?php
@@ -155,4 +161,23 @@
 </div>
 
 <?php include('includes/script.php'); ?>
+
+<script>
+  function Restart() {
+    var session_id = $("#session_id").val();
+    console.log("Session ID :", session_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-session", message: {sessionId: session_id, command: "RESTART"}}});
+    window.dispatchEvent(event);
+ }
+</script>
+
+<script>
+  function TurnOff() {
+    var session_id = $("#session_id").val();
+    console.log("Session ID :", session_id);
+    var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-session", message: {sessionId: session_id, command: "TURN_OFF"}}});
+    window.dispatchEvent(event);
+  }
+</script>
+
 <?php include('includes/footer.php'); ?>

@@ -8,7 +8,10 @@
   }
   else{
     if ($_SESSION['auth'] == "SuperAdmin") {
-      // code...
+      // 
+    }
+    elseif ($_SESSION['auth'] == "Admin") {
+      // 
     }
     else{
       $_SESSION['status'] = "You are not Authorized as ADMIN";

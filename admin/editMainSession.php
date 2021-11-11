@@ -20,7 +20,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item active">Edit User Session</li>
+            <li class="breadcrumb-item active">Edit Main Session</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -33,7 +33,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Edit-User Session</h3>
+              <h3 class="card-title">Edit Main Session</h3>
               <a href="session-users.php" class="btn btn-primary btn-sm float-right">BACK</a>
             </div>
             <!-- /.card-header -->
@@ -45,7 +45,7 @@
                       <?php
                         if (isset($_GET['sn'])) {
                           $sn = $_GET['sn'];
-                          $query = "SELECT * FROM session_users WHERE sn='$sn' LIMIT 1";
+                          $query = "SELECT * FROM main_sessions WHERE sn='$sn' LIMIT 1";
                           $result = mysqli_query($conn, $query);
 
                           if (mysqli_num_rows($result) > 0) {
@@ -57,12 +57,8 @@
                                   <input type="text" class="form-control" name="session_id" id="session_id" placeholder="Session ID" required value="<?php echo $row['session_id']; ?>" />
                                 </div>
                                 <div class="form-group">
-                                  <label for="">User ID</label>
-                                  <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID" required value="<?php echo $row['user_id']; ?>" />
-                                </div>
-                                <div class="form-group">
-                                  <label for="">Device ID</label>
-                                  <input type="text" class="form-control" name="device_id" id="device_id" placeholder="device_id" required value="<?php echo $row['device_id']; ?>" />
+                                  <label for="">Session Name</label>
+                                  <input type="text" class="form-control" name="name" id="name" placeholder="Session Name" required value="<?php echo $row['name']; ?>" />
                                 </div>
                               <?php
                             }
@@ -74,7 +70,7 @@
                       ?>
                    </div>
                    <div class="modal-footer">
-                      <button type="submit" name="updateUserSession" class="btn btn-info">Update</button>
+                      <button type="submit" name="updateMainSession" class="btn btn-info">Update</button>
                     </div>
                   </form>
                 </div>
