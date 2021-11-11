@@ -367,8 +367,8 @@
     }
   }
 
-  if (isset($_POST['DeleteMainSessionbtn'])) {
-    $mainsession_delete_id = $_POST['delete_session_id'];
+  if (isset($_POST['deleteMainSessionUsers'])) {
+    $mainsession_delete_id = $_POST['delete_mainsession_id'];
 
     $query = "DELETE FROM main_sessions WHERE sn='$mainsession_delete_id'";
     $result = mysqli_query($conn, $query);

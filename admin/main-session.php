@@ -58,34 +58,7 @@
         </form>
       </div>
     </div>
-    </div>
-
-    <!-- Delete User -->
-    <div class="modal fade" id="DeleteSessionModal" tabindex="-1" aria-labelledby="exampleModalLabel"aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete Session</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form action="code.php" method="POST">
-            <div class="modal-body">
-              <input type="hidden" name="delete_session" class="delete_session_id">
-              <p>
-                Are you sure. you want to delete this data ?
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" name="DeleteMainSessionbtn" class="btn btn-danger">Yes, Delete</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- Delete User -->  
+    </div> 
   
     <section class="ftco-section">
       <div class="container">
@@ -133,6 +106,7 @@
                               <td>
                                 <form action="code.php" method="POST">
                                   <a href="editMainSession.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                  <input type="hidden" name="delete_mainsession_id" value="<?= $row['sn']; ?>">
                                   <button type="submit" name="deleteMainSessionUsers" class="btn btn-danger btn-sm">
                                    Delete
                                   </button>

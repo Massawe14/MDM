@@ -30,8 +30,18 @@
   			'admin_password'=>$admin_password
   		];
 
-  		$_SESSION['status'] = "Logged In Successfully";
-  	    header('Location: index.php');
+      if ($role_as == "SuperAdmin") {
+        $_SESSION['status'] = "Logged In Successfully";
+        header('Location: index.php');
+      }
+      elseif ($role_as == "Admin") {
+        $_SESSION['status'] = "Logged In Successfully";
+        header('Location: admin.php');
+      }
+      else{
+        $_SESSION['status'] = "Unauthorized";
+        header('Location: login.php');
+      }
   	}
   	else{
   		$_SESSION['status'] = "Invalid Username or Password";
