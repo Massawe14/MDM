@@ -132,27 +132,56 @@
       </div>
       <div id="map"></div>
       <script>
+        <?php
+          if (isset($_POST['displayMap'])) {
+            $display_map = $_POST['display_map'];
+
+            $query = "SELECT location_lat, location_lng FROM devices WHERE device_id='$display_map'";
+            $result = mysqli_query($conn, $query);
+
+            foreach ($result as $row) {
+
+              $positions = (object)[
+                  'lat' =>   (float)$row['location_lat'],
+                  'lng' =>   (float)$row['location_lng']
+                ];
+            }
+            $positions = json_encode($positions);
+          }
+          else {
+            echo "No data to display";
+          } 
+        ?>
+
+        var positions = JSON.parse(`<?php echo ($positions); ?>`);
+        console.log(positions);
+        console.log("lat", positions.lat);
+        console.log("lng", positions.lng);
+
         function initMap(){
           // Map options
           var options = {
             zoom:8,
             center:{
-              lat:-6.787500, 
-              lng:39.274300
+              lat: positions.lat, 
+              lng: positions.lng
             }
           }
           
-          // new map
+          // New map
           var map = new google.maps.Map(document.getElementById('map'), options);
+
+          // Marker icon
+          mark = 'assets/dist/img/ip-address.png';
 
           // Add Marker
           var marker = new google.maps.Marker({
             position: {
-              lat:-6.787500,
-              lng:39.274300
+              lat: positions.lat,
+              lng: positions.lng
             },
             map: map,
-            icon: 'assets/dist/img/ip-address.png'
+            icon: mark
           });
 
           var infoWindow = new google.maps.InfoWindow({
@@ -162,10 +191,6 @@
           marker.addListener('click', function(){
             infoWindow.open(map, marker);
           });
-
-          google.maps.event.addListener(popup, "closeclick", function() {
-            infoWindow.close(map, marker);
-          })
         }
       </script>
       <script async defer 

@@ -165,7 +165,7 @@
                               <td><?php echo $row['location_lng']; ?></td> -->
                               <td><?php echo $row['last_used']; ?></td>
                               <td>
-                                <form action="map.php" method="POST">
+                                <form action="index.php" method="POST">
                                   <input type="hidden" name="display_map" value="<?= $row['device_id']; ?>">
                                   <button type="submit" name="displayMap" class="btn btn-success btn-sm">
                                     View
