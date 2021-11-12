@@ -143,7 +143,7 @@
 
               $positions = (object)[
                   'lat' =>   (float)$row['location_lat'],
-                  'lng' =>   (float)$row['location_lng']
+                  'lng' =>   (float)$row['location_lng'],
                 ];
             }
             $positions = json_encode($positions);
