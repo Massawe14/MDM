@@ -10,7 +10,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Map</title>
+	<title>Map | View</title>
 	<style>
 		#map{
 			height: 400px;
@@ -21,158 +21,105 @@
 <body>
     <div id="map"></div>
     <?php
-    if (isset($_GET['device_id'])) {
-    	$sn = $_GET['device_id'];
-    	$sql = "SELECT * FROM devices where device_id=$city";
-        $res = mysql_query($sql);
+      if (isset($_POST['displayMap'])) {
+        $display_map = $_POST['display_map'];
 
+        $query = "SELECT location_lat, location_lng FROM devices WHERE device_id='$display_map'";
+        $result = mysqli_query($conn, $query);
 
-        $positions = array();
-        while($row=mysql_fetch_assoc($res)){
-          /* <script> var myLatLng = {lat: <?php echo $row['latitude'] ?>, lng: <?php echo $row['longitude']?>};</script>*/
+        foreach ($result as $row) {
 
-          $positions[] = array(
-              'lat' =>   $row['location_lat'],
-              'lng' =>   $row['location_lng'],
-              'title' => $row['location_lng']. ' || ' .$row['location_lat']
-          );
+        	$positions = (object)[
+              'lat' =>   (float)$row['location_lat'],
+              'lng' =>   (float)$row['location_lng']
+            ];
         }
-    }
-
+        $positions = json_encode($positions);
+      }
+      else {
+        echo "No data to display";
+      } 
     ?>
+
+    <!-- <script>
+      var positions = <?php echo json_encode($positions) ?>;
+    </script> -->
+
+    <!-- <script>
+      function initMap() {
+      	var positions = JSON.parse(`<?php echo ($positions); ?>`);
+    	console.log(positions);
+
+        mark = 'assets/dist/img/ip-address.png';
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {
+          	'lat' : positions.lat,
+          	'lng' : positions.lng
+          }
+        });
+
+        positions.forEach(function(position){
+          var marker = new google.maps.Marker({
+            position: {
+              'lat' : position.lat,
+              'lng' : position.lng
+            },
+            map: map,
+            icon: mark,
+            title: position.title
+          });
+        });
+      }
+    </script> -->
+
     <script>
 
-        var positions = <?php echo json_encode($positions) ?>;
+    	var positions = JSON.parse(`<?php echo ($positions); ?>`);
+    	console.log(positions);
+    	console.log("lat", positions.lat);
+    	console.log("lng", positions.lng);
 
-    </script>
+        function initMap(){
+          // Map options
+          var mapOptions = {
+            zoom: 8,
+            center: {
+            	lat: positions.lat,
+            	lng: positions.lng
+            }
+          }
+          
+          // new map
+          var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    <script>
-        function initMap() {
-            icon='assets/dist/img/ip-address.png';
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-                fullscreenControl: true,
-                center: myLatLng
-            });
+          // Add Marker
+          var marker = new google.maps.Marker({
+            position: {
+            	lat: positions.lat,
+            	lng: positions.lng
+            },
+            map: map,
+            icon: 'assets/dist/img/ip-address.png'
+          });
 
-            positions.forEach(function(position){
-                var marker = new google.maps.Marker({
-                    position: {
-                        'lat' : position.lat,
-                        'lng' : position.lng
-                    },
-                    map: map,
-                    icon:icon,
-                    title: position.title
-                });
-            });
+          var infoWindow = new google.maps.InfoWindow({
+            content: '<h1>Imperial Distributor</h1>'
+          });
 
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
+
+          google.maps.event.addListener(popup, "closeclick", function() {
+            infoWindow.close(map, marker);
+          })
         }
-
-    </script>
-    <script async defer src="http://maps.googleapis.com/maps/api/js?AIzaSyCaGmjoEOWkGZT9HUU4e8pjN8aapRWfWOc=myKEY&callback=initMap">
     </script>
 
+    <script async defer 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLra3FKhGBOPGhB1BcgTKlQV35j9Z1szk&callback=initMap">
+    </script>
 
-</body>
-<!-- <body>
-	<h1>Google Map</h1>
-	<div id="map"></div>
-	<script>
-		function initMap(){
-			// Map options
-			var options = {
-				zoom:8,
-				center:{
-					lat:-6.787500,
-					lng:39.274300
-				}
-			}
-            
-            // new map
-			var map = new google.maps.Map(document.getElementById('map'), options);
-
-			// Listen for click on map
-			// google.maps.Map.event.addListener(map, 'click', 
-			// 	function(event){
-			// 		// Add marker
-			// 		addMarker({coords: event.latlng});
-			// });
-
-			// Add Marker
-			var marker = new google.maps.Marker({
-				position: {
-					lat:-6.787500,
-					lng:39.274300
-				},
-				map: map,
-				icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-			});
-
-			var infoWindow = new google.maps.InfoWindow({
-				content: '<h1>Imperial Distributor</h1>'
-			});
-
-			marker.addListener('click', function(){
-				infoWindow.open(map, marker);
-			});
-
-			// Array of markers
-			// var markers = [
-			//     {
-			// 	    coords: {lat:-6.212470, lng:35.810307},
-			// 	    iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-			// 	    content: '<h1>Lynn MA</h1>'
-		 //       },
-		 //       // {
-		 //       // 	coords: {lat: 42.8584, lng: -71.0773},
-		 //       // 	content: '<h1>Amesbury MA</h1>'
-		 //       // }
-			// ];
-
-			// Loop through markers
-			// for (var i = 0; i < markers.lengths; i++) {
-			// 	// Add marker
-			// 	addMarker(markers[i]);
-			// }
-
-			/*
-			addMarker({
-				coords: {lat:42.4668, lang:-70.9495},
-				iconImage: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-				content: '<h1>Lynn MA</h1>'
-		    });
-		    */
-
-			// Add Marker Function
-			// function addMarker(props) {
-			// 	var marker = new google.maps.Marker({
-			// 	    position: props.coords,
-			// 	    map: map,
-			// 	    // icon: props.iconImage
-			//     });
-
-   //              // Check for custom icon
-			//     if (props.iconImage) {
-			//     	// Set icon image
-			//     	marker.setIcon(props.iconImage);
-			//     }
-
-			//     // Check content
-			//     if (props.content) {
-			//     	var infoWindow = new google.maps.InfoWindow({
-			// 	        content: props.content
-			//         });
-
-			//         marker.addListener('click', function(){
-			// 	        infoWindow.open(map, marker);
-			//         });
-			//     }
-			// }
-		}
-	</script>
-	<script async defer 
-	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaGmjoEOWkGZT9HUU4e8pjN8aapRWfWOc&callback=initMap">
-	</script> -->
 </body>
 </html>

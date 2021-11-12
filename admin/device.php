@@ -126,8 +126,8 @@
                       <th>Date Created</th>
                       <th>Battery Level</th>
                       <th>Battery Charging</th>
-                      <th>Location Lat</th>
-                      <th>Location Long</th>
+                      <!-- <th>Location Lat</th>
+                      <th>Location Long</th> -->
                       <th>Last Used</th>
                       <th>Location</th>
                       <th>Actions</th>
@@ -161,11 +161,16 @@
                                   }
                                 ?>
                               </td>
-                              <td><?php echo $row['location_lat']; ?></td>
-                              <td><?php echo $row['location_lng']; ?></td>
+                              <!-- <td><?php echo $row['location_lat']; ?></td>
+                              <td><?php echo $row['location_lng']; ?></td> -->
                               <td><?php echo $row['last_used']; ?></td>
                               <td>
-                                <a href="map.php?device_id=<?php echo $row['device_id']; ?>" class="btn btn-success btn-sm">View</a>
+                                <form action="map.php" method="POST">
+                                  <input type="hidden" name="display_map" value="<?= $row['device_id']; ?>">
+                                  <button type="submit" name="displayMap" class="btn btn-success btn-sm">
+                                    View
+                                  </button>
+                                </form>
                               </td>
                               <td>
                                 <a href="device-edit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>

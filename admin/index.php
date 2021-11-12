@@ -162,6 +162,10 @@
           marker.addListener('click', function(){
             infoWindow.open(map, marker);
           });
+
+          google.maps.event.addListener(popup, "closeclick", function() {
+            infoWindow.close(map, marker);
+          })
         }
       </script>
       <script async defer 
