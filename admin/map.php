@@ -1,3 +1,9 @@
+<?php
+
+  include('authentication.php');
+  include('config/dbconn.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +19,63 @@
 	</style>
 </head>
 <body>
+    <div id="map"></div>
+    <?php
+    if (isset($_GET['device_id'])) {
+    	$sn = $_GET['device_id'];
+    	$sql = "SELECT * FROM devices where device_id=$city";
+        $res = mysql_query($sql);
+
+
+        $positions = array();
+        while($row=mysql_fetch_assoc($res)){
+          /* <script> var myLatLng = {lat: <?php echo $row['latitude'] ?>, lng: <?php echo $row['longitude']?>};</script>*/
+
+          $positions[] = array(
+              'lat' =>   $row['location_lat'],
+              'lng' =>   $row['location_lng'],
+              'title' => $row['location_lng']. ' || ' .$row['location_lat']
+          );
+        }
+    }
+
+    ?>
+    <script>
+
+        var positions = <?php echo json_encode($positions) ?>;
+
+    </script>
+
+    <script>
+        function initMap() {
+            icon='assets/dist/img/ip-address.png';
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                fullscreenControl: true,
+                center: myLatLng
+            });
+
+            positions.forEach(function(position){
+                var marker = new google.maps.Marker({
+                    position: {
+                        'lat' : position.lat,
+                        'lng' : position.lng
+                    },
+                    map: map,
+                    icon:icon,
+                    title: position.title
+                });
+            });
+
+        }
+
+    </script>
+    <script async defer src="http://maps.googleapis.com/maps/api/js?AIzaSyCaGmjoEOWkGZT9HUU4e8pjN8aapRWfWOc=myKEY&callback=initMap">
+    </script>
+
+
+</body>
+<!-- <body>
 	<h1>Google Map</h1>
 	<div id="map"></div>
 	<script>
@@ -110,6 +173,6 @@
 	</script>
 	<script async defer 
 	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaGmjoEOWkGZT9HUU4e8pjN8aapRWfWOc&callback=initMap">
-	</script>
+	</script> -->
 </body>
 </html>

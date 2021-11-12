@@ -133,15 +133,35 @@
       <div id="map"></div>
       <script>
         function initMap(){
+          // Map options
           var options = {
             zoom:8,
             center:{
-              lat:-6.212470, 
-              lng:35.810307
+              lat:-6.787500, 
+              lng:39.274300
             }
           }
-
+          
+          // new map
           var map = new google.maps.Map(document.getElementById('map'), options);
+
+          // Add Marker
+          var marker = new google.maps.Marker({
+            position: {
+              lat:-6.787500,
+              lng:39.274300
+            },
+            map: map,
+            icon: 'assets/dist/img/ip-address.png'
+          });
+
+          var infoWindow = new google.maps.InfoWindow({
+            content: '<h1>Imperial Distributor</h1>'
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
         }
       </script>
       <script async defer 

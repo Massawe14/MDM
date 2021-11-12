@@ -6,7 +6,7 @@
   include('includes/topbar.php');
   include('includes/sidebar.php');
   include('config/dbconn.php');
-  require_once('includes/socket_client.php');
+  require_once('socket/socket_client.php');
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -165,7 +165,7 @@
                               <td><?php echo $row['location_lng']; ?></td>
                               <td><?php echo $row['last_used']; ?></td>
                               <td>
-                                <a href="#" class="btn btn-success btn-sm">View</a>
+                                <a href="map.php?device_id=<?php echo $row['device_id']; ?>" class="btn btn-success btn-sm">View</a>
                               </td>
                               <td>
                                 <a href="device-edit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
