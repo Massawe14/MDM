@@ -39,7 +39,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="code.php" method="POST" enctype="multipart/form-data">
+        <form action="admincode.php" method="POST" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
@@ -102,7 +102,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="code.php" method="POST">
+          <form action="adminCode.php" method="POST">
             <div class="modal-body">
               <input type="hidden" name="delete_user" class="delete_user_id">
               <p>
