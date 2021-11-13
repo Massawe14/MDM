@@ -83,7 +83,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="code.php" method="POST">
+          <form action="adminCode.php" method="POST">
             <div class="modal-body">
               <input type="hidden" name="delete_device" class="delete_device_id">
               <p>
@@ -209,8 +209,8 @@
 
     $('.deletedevicebtn').click(function (e) {
       e.preventDefault();
-      var device_id = $(this).val();
-      $('.delete_device_id').val(device_id);
+      var sn = $(this).val();
+      $('.delete_device_id').val(sn);
       $('#DeleteDeviceModal').modal('show');
     });
 

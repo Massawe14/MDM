@@ -22,11 +22,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device added Successfully";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
     else{
       $_SESSION['status'] = "Device Insertion Failed";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
   }
 
@@ -40,11 +40,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device Updated Successfully";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
     else{
       $_SESSION['status'] = "Device Updating Failed";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
   }
 
@@ -56,11 +56,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device Deleted Successfully";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
     else{
       $_SESSION['status'] = "Device Deleting Failed";
-      header('Location: adminDevice.php');
+      header('Location: adminDeviceInfo.php');
     }
   }
 
