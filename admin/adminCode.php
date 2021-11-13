@@ -35,7 +35,7 @@
     $device_id = $_POST['device_id'];
     $name = $_POST['name'];
 
-    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn";
+    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -196,7 +196,7 @@
     //   exit(0);
     // }
     else{
-      $query = "UPDATE `users` SET first_name='$firstname', last_name='$lastname', username='$username', email='$useremail', image='$filename', password_hash='$password_encrypt' WHERE sn=$sn";
+      $query = "UPDATE `users` SET first_name='$firstname', last_name='$lastname', username='$username', email='$useremail', image='$filename', password_hash='$password_encrypt' WHERE sn='$sn'";
       $result = mysqli_query($conn, $query);
 
       if ($result) {
@@ -269,16 +269,16 @@
     $session_id = $_POST['session_id'];
     $name = $_POST['name'];
 
-    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn";
+    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
       $_SESSION['status'] = "Session Updated Successfully";
-      header('Location: adminUserSessionInfo.php');
+      header('Location: adminMainSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "Session Updating Failed";
-      header('Location: adminUserSessionInfo.php');
+      header('Location: adminMainSessionInfo.php');
     }
   }
 
@@ -339,7 +339,7 @@
     $user_id = $_POST['user_id'];
     $device_id = $_POST['device_id'];
 
-    $query = "UPDATE session_users SET session_id='$session_id', user_id='$user_id', device_id='$device_id' WHERE sn='$sn";
+    $query = "UPDATE session_users SET session_id='$session_id', user_id='$user_id', device_id='$device_id' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

@@ -35,7 +35,7 @@
     $device_id = $_POST['device_id'];
     $name = $_POST['name'];
 
-    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn";
+    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -138,7 +138,7 @@
     // password encryption
     $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = "UPDATE `admin` SET first_name='$firstname', last_name='$lastname', username='$username', email='$adminemail', password_hash='$password_encrypt', role_as='$role_as' WHERE sn=$sn";
+    $query = "UPDATE `admin` SET first_name='$firstname', last_name='$lastname', username='$username', email='$adminemail', password_hash='$password_encrypt', role_as='$role_as' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -299,7 +299,7 @@
     //   exit(0);
     // }
     else{
-      $query = "UPDATE `users` SET first_name='$firstname', last_name='$lastname', username='$username', email='$useremail', image='$filename', password_hash='$password_encrypt' WHERE sn=$sn";
+      $query = "UPDATE `users` SET first_name='$firstname', last_name='$lastname', username='$username', email='$useremail', image='$filename', password_hash='$password_encrypt' WHERE sn='$sn'";
       $result = mysqli_query($conn, $query);
 
       if ($result) {
@@ -372,7 +372,7 @@
     $session_id = $_POST['session_id'];
     $name = $_POST['name'];
 
-    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn";
+    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

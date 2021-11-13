@@ -4,7 +4,7 @@
   
   include('includes/header.php');
   include('includes/adminTopbar.php');
-  include('includes/adminSidebar.php');
+  // include('includes/adminSidebar.php');
   include('config/dbconn.php');
   require_once('socket/socket_client.php');
 ?>
