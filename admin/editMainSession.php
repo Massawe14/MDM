@@ -34,7 +34,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Edit Main Session</h3>
-              <a href="session-users.php" class="btn btn-primary btn-sm float-right">BACK</a>
+              <a href="main-session.php" class="btn btn-primary btn-sm float-right">BACK</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

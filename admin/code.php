@@ -367,6 +367,24 @@
     }
   }
 
+  if (isset($_POST['updateMainSession'])) {
+    $sn = $_POST['sn'];
+    $session_id = $_POST['session_id'];
+    $name = $_POST['name'];
+
+    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session Updated Successfully";
+      header('Location: adminUserSessionInfo.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Updating Failed";
+      header('Location: adminUserSessionInfo.php');
+    }
+  }
+
   if (isset($_POST['deleteMainSessionUsers'])) {
     $mainsession_delete_id = $_POST['delete_mainsession_id'];
 

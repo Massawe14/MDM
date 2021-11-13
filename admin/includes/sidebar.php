@@ -1,3 +1,7 @@
+<?php 
+  require_once('socket/socket_client.php');
+?>
+
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -147,18 +151,24 @@
                   <p>Change Password</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="#" class="nav-link">
+              <li class="nav-item">
+                <!-- <a href="#" class="nav-link">
                   <i class="las la-undo-alt nav-icon"></i>
                   <p>Restart</p>
-                </a>
+                </a> -->
+                <button onclick="Restart();" type="button" class="nav-link btn warning">
+                  <i class="las la-undo-alt nav-icon"></i> Restart
+                </button>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <!-- <a href="#" class="nav-link">
                   <i class="las la-power-off nav-icon"></i>
                   <p>Shutdown</p>
-                </a>
-              </li> -->
+                </a> -->
+                <button onclick="TurnOff();" type="button" class="nav-link btn danger">
+                  <i class="las la-power-off nav-icon"></i> Shutdown
+                </button>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -178,40 +188,7 @@
               </li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
-              <i class="nav-icon las la-images"></i>
-              <p>
-                Image Processing
-              </p>
-            </a>
-          </li> -->
           <li class="nav-header">PROCESSING</li>
-          <!-- <li class="nav-item has-treeview">
-            <a href="index.php" class="nav-link">
-              <i class="nav-icon las la-print"></i>
-              <p>
-                Report
-                <i class="las la-caret-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="las la-calendar-week nav-icon"></i>
-                  <p>Weekly Report</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="las la-calendar nav-icon"></i>
-                  <p>Monthly Report</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
           <li class="nav-item">
             <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
               <i class="nav-icon las la-images"></i>
@@ -226,3 +203,17 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+
+  <script>
+    function Restart() {
+      var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-all", message: {command: "RESTART"}}});
+      window.dispatchEvent(event);
+    }
+  </script>
+
+  <script>
+    function TurnOff() {
+      var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-all", message: {command: "TURN_OFF"}}});
+      window.dispatchEvent(event);
+    }
+  </script>
