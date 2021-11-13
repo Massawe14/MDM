@@ -3,8 +3,8 @@
   include('authentication.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
-  include('includes/sidebar.php');
+  include('includes/adminTopbar.php');
+  include('includes/adminSidebar.php');
   include('config/dbconn.php');
 ?>
 
@@ -20,7 +20,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
               <li class="breadcrumb-item active">Change Password</li>
             </ol>
           </div><!-- /.col -->
@@ -39,7 +39,7 @@
                 </h4>
               </div>
               <div class="card-body">
-                <form action="code.php" method="POST">
+                <form action="adminCode.php" method="POST">
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-md-6">
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <a href="index.php" class="btn btn-secondary">BACK</a>
+                    <a href="admin.php" class="btn btn-secondary">BACK</a>
                     <button type="submit" name="changePassword" class="btn btn-primary">Change</button>
                   </div>
                 </form>

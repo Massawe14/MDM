@@ -4,7 +4,7 @@
   include('config/dbconn.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
+  include('includes/adminTopbar.php');
   include('includes/adminSidebar.php');
 ?>
 
@@ -20,7 +20,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
@@ -55,7 +55,7 @@
               <div class="icon">
                 <i class="las la-mobile"></i>
               </div>
-              <a href="device.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="adminDeviceInfo.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -75,7 +75,7 @@
               <div class="icon">
                 <i class="las la-clock"></i>
               </div>
-              <a href="main-session.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="adminMainSessionInfo.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -95,7 +95,7 @@
               <div class="icon">
                 <i class="las la-users"></i>
               </div>
-              <a href="registered.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="adminUserinfo.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -115,7 +115,7 @@
               <div class="icon">
                 <i class="las la-folder-open"></i>
               </div>
-              <a href="session-logs.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
+              <a href="adminSessionLogs.php" class="small-box-footer">More info <i class="las la-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -127,21 +127,70 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h2 class="m-0 text-dark">Devices Location</h2>
+          <h2 class="m-0 text-dark">Device Location</h2>
         </div>
       </div>
       <div id="map"></div>
       <script>
+        <?php
+          if (isset($_POST['displayMap'])) {
+            $display_map = $_POST['display_map'];
+
+            $query = "SELECT location_lat, location_lng FROM devices WHERE device_id='$display_map'";
+            $result = mysqli_query($conn, $query);
+
+            foreach ($result as $row) {
+
+              $positions = (object)[
+                  'lat' =>   (float)$row['location_lat'],
+                  'lng' =>   (float)$row['location_lng'],
+                ];
+            }
+            $positions = json_encode($positions);
+          }
+          else {
+            echo "No data to display";
+          } 
+        ?>
+
+        var positions = JSON.parse(`<?php echo ($positions); ?>`);
+        console.log(positions);
+        console.log("lat", positions.lat);
+        console.log("lng", positions.lng);
+
         function initMap(){
+          // Map options
           var options = {
             zoom:8,
             center:{
-              lat:-6.212470, 
-              lng:35.810307
+              lat: positions.lat, 
+              lng: positions.lng
             }
           }
-
+          
+          // New map
           var map = new google.maps.Map(document.getElementById('map'), options);
+
+          // Marker icon
+          mark = 'assets/dist/img/ip-address.png';
+
+          // Add Marker
+          var marker = new google.maps.Marker({
+            position: {
+              lat: positions.lat,
+              lng: positions.lng
+            },
+            map: map,
+            icon: mark
+          });
+
+          var infoWindow = new google.maps.InfoWindow({
+            content: '<h1>Imperial Distributor</h1>'
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
         }
       </script>
       <script async defer 

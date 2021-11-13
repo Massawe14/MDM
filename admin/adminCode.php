@@ -22,11 +22,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device added Successfully";
-      header('Location: device.php');
+      header('Location: adminDevice.php');
     }
     else{
       $_SESSION['status'] = "Device Insertion Failed";
-      header('Location: device.php');
+      header('Location: adminDevice.php');
     }
   }
 
@@ -40,11 +40,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device Updated Successfully";
-      header('Location: device.php');
+      header('Location: adminDevice.php');
     }
     else{
       $_SESSION['status'] = "Device Updating Failed";
-      header('Location: device.php');
+      header('Location: adminDevice.php');
     }
   }
 
@@ -56,114 +56,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Device Deleted Successfully";
-      header('Location: device.php');
+      header('Location: adminDevice.php');
     }
     else{
       $_SESSION['status'] = "Device Deleting Failed";
-      header('Location: device.php');
-    }
-  }
-
-  // ADMIN
-  if (isset($_POST['check_Emailbtn'])) {
-
-    $adminemail = $_POST['email'];
-
-    $checkemail = "SELECT email FROM admin WHERE email='$adminemail'";
-    $checkemail_result = mysqli_query($conn, $checkemail);
-
-    if (mysqli_num_rows($checkemail_result) > 0) {
-      echo "Email Already Exists";
-    }
-    else{
-      echo "It's Available";
-    }
-  }
-
-  if (isset($_POST['addAdmin'])) {
-    // there are no errors so let's get data from the form
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $username = $_POST['username'];
-    $adminemail = $_POST['email'];
-    $password = $_POST['password'];
-    $role_as = $_POST['role_as'];
-    $confirmpassword = $_POST['confirmpassword'];
-    
-    // password encryption
-    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
-
-    if (password_verify($confirmpassword, $password_encrypt)) {
-
-       $checkemail = "SELECT email FROM admin WHERE email='$adminemail'";
-       $checkemail_result = mysqli_query($conn, $checkemail);
-
-       if (mysqli_num_rows($checkemail_result) > 0) {
-         // Taken - Already Exists
-         $_SESSION['status'] = "Email Already Exists";
-         header('Location: registeradmin.php');
-         exit;
-       }
-       else{
-        // Now we have collected the form data in variables
-        // Let's insert them to the table
-        $query = "INSERT INTO `admin`(`first_name`, `last_name`, `username`, `email`, `password_hash`, `role_as`) VALUES ('$firstname', '$lastname', '$username', '$adminemail', '$password_encrypt', '$role_as')";
-        $result = mysqli_query($conn, $query); 
-
-        if ($result) {
-          $_SESSION['status'] = "Admin Added Successfully";
-          header('Location: registeradmin.php');
-        }
-        else{
-          $_SESSION['status'] = "Admin Registration Failed";
-          header('Location: registeradmin.php');
-        }
-      }
-    }
-    else{
-      $_SESSION['status'] = "Password and Confirm Password does not match";
-      header('Location: registeradmin.php');
-    }
-  }
-
-  if (isset($_POST['updateAdmin'])) {
-    $sn = $_POST['sn'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $username = $_POST['username'];
-    $adminemail = $_POST['email'];
-    $password = $_POST['password'];
-    $role_as = $_POST['role_as'];
-    
-    // password encryption
-    $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
-
-    $query = "UPDATE `admin` SET first_name='$firstname', last_name='$lastname', username='$username', email='$adminemail', password_hash='$password_encrypt', role_as='$role_as' WHERE sn=$sn";
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-      $_SESSION['status'] = "Admin Updated Successfully";
-      header("Location: registeradmin.php");
-    }
-    else{
-      $_SESSION['status'] = "Admin Updating Failed";
-      header("Location: registeradmin.php");
-    }
-  }
-
-  if (isset($_POST['DeleteAdminbtn'])) {
-    $adminid = $_POST['delete_admin'];
-
-    $sql = "DELETE FROM admin WHERE sn = '$adminid'";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result) {
-      $_SESSION['status'] = "Admin Deleted Successfully";
-      header("Location: registeradmin.php");
-    }
-    else{
-      $_SESSION['status'] = "Admin Deleting Failed";
-      header("Location: registeradmin.php");
+      header('Location: adminDevice.php');
     }
   }
 
@@ -211,27 +108,27 @@
        if (mysqli_num_rows($checkemail_result) > 0) {
          // Taken - Already Exists
          $_SESSION['status'] = "Email Already Exists";
-         header('Location: registered.php');
+         header('Location: adminUserinfo.php');
          exit(0);
        }
        elseif ($check == false) {
          $_SESSION['status'] = "File is not an image.";
-         header('Location: registered.php');
+         header('Location: adminUserinfo.php');
          exit(0);
        }
        elseif (file_exists($filename)) {
          $_SESSION['status'] = "Sorry, file already exists.";
-         header('Location: registered.php');
+         header('Location: adminUserinfo.php');
          exit(0);
        }
        elseif (!in_array($file_extension, $allowed_extension)) {
          $_SESSION['status'] = "You are allowed with only jpg, png and jpeg Image";
-         header('Location: registered.php');
+         header('Location: adminUserinfo.php');
          exit(0);
        }
        // elseif ($_FILES["image"]["size"] > 500000) {
        //   $_SESSION['status'] = "Sorry, your file is too large.";
-       //   header('Location: registered.php');
+       //   header('Location: adminUserinfo.php');
        //   exit(0);
        // }
        else{
@@ -243,19 +140,19 @@
         if ($result) {
           move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/images/'.$filename);
           $_SESSION['status'] = "User Added Successfully";
-          header('Location: registered.php');
+          header('Location: adminUserinfo.php');
           exit(0);
         }
         else{
           $_SESSION['status'] = "User Registration Failed";
-          header('Location: registered.php');
+          header('Location: adminUserinfo.php');
           exit(0);
         }
       }
     }
     else{
       $_SESSION['status'] = "Password and Confirm Password does not match";
-      header('Location: registered.php');
+      header('Location: adminUserinfo.php');
     }
   }
 
@@ -280,22 +177,22 @@
 
     if ($check == false) {
       $_SESSION['status'] = "File is not an image.";
-      header('Location: registered.php');
+      header('Location: adminUserinfo.php');
       exit(0);
     }
     elseif (file_exists($filename)) {
       $_SESSION['status'] = "Sorry, file already exists.";
-      header('Location: registered.php');
+      header('Location: adminUserinfo.php');
       exit(0);
     }
     elseif (!in_array($file_extension, $allowed_extension)) {
       $_SESSION['status'] = "You are allowed with only jpg, png and jpeg Image";
-      header('Location: registered.php');
+      header('Location: adminUserinfo.php');
       exit(0);
     }
     // elseif ($_FILES["image"]["size"] > 500000) {
     //   $_SESSION['status'] = "Sorry, your file is too large.";
-    //   header('Location: registered.php');
+    //   header('Location: adminUserinfo.php');
     //   exit(0);
     // }
     else{
@@ -305,12 +202,12 @@
       if ($result) {
         move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/images/'.$filename);
         $_SESSION['status'] = "User Updated Successfully";
-        header("Location: registered.php");
+        header("Location: adminUserinfo.php");
         exit(0);
       }
       else{
         $_SESSION['status'] = "User Updating Failed";
-        header("Location: registered.php");
+        header("Location: adminUserinfo.php");
         exit(0);
       }
     }
@@ -324,15 +221,15 @@
 
     if ($result) {
       $_SESSION['status'] = "User Deleted Successfully";
-      header("Location: registered.php");
+      header("Location: adminUserinfo.php");
     }
     else{
       $_SESSION['status'] = "User Deleting Failed";
-      header("Location: registered.php");
+      header("Location: adminUserinfo.php");
     }
   }
 
-  // DELETE SESSION LOGS
+  // SESSION LOGS
   if (isset($_POST['deleteSessionLogs'])) {
     $sessionlogs_delete_sn = $_POST['delete_session_sn'];
 
@@ -341,11 +238,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Session Logs Deleted Successfully";
-      header('Location: session-logs.php');
+      header('Location: adminSessionLogs.php');
     }
     else{
       $_SESSION['status'] = "Session Logs Deleting Failed";
-      header('Location: session-logs.php');
+      header('Location: adminSessionLogs.php');
     }
   }
 
@@ -359,11 +256,29 @@
 
     if ($result) {
       $_SESSION['status'] = "Session added Successfully";
-      header('Location: main-session.php');
+      header('Location: adminMainSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "Session Insertion Failed";
-      header('Location: main-session.php');
+      header('Location: adminMainSessionInfo.php');
+    }
+  }
+
+  if (isset($_POST['updateMainSession'])) {
+    $sn = $_POST['sn'];
+    $session_id = $_POST['session_id'];
+    $name = $_POST['name'];
+
+    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+      $_SESSION['status'] = "Session Updated Successfully";
+      header('Location: adminUserSessionInfo.php');
+    }
+    else{
+      $_SESSION['status'] = "Session Updating Failed";
+      header('Location: adminUserSessionInfo.php');
     }
   }
 
@@ -375,11 +290,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Session Deleted Successfully";
-      header('Location: main-session.php');
+      header('Location: adminMainSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "Session Deleting Failed";
-      header('Location: main-session.php');
+      header('Location: adminMainSessionInfo.php');
     }
   }
 
@@ -394,11 +309,11 @@
 
     if ($device_query_result) {
       $_SESSION['status'] = "Session added Successfully";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "Session Insertion Failed";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
   }
 
@@ -410,11 +325,11 @@
 
     if ($result) {
       $_SESSION['status'] = "Session User Deleted Successfully";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "Session User Deleting Failed";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
   }
 
@@ -429,11 +344,11 @@
 
     if ($result) {
       $_SESSION['status'] = "User Session Updated Successfully";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
     else{
       $_SESSION['status'] = "User Session Updating Failed";
-      header('Location: session-users.php');
+      header('Location: adminUserSessionInfo.php');
     }
   }
 

@@ -3,7 +3,7 @@
 <script>
   window.onload = function() {
     console.log("window is loaded");
-    const socket = io("ws://192.168.100.5:3000"); //mdm-socket.herokuapp.com
+    const socket = io("wss://mdm-socket.herokuapp.com"); //mdm-socket.herokuapp.com ws://192.168.100.5:3000
 
     socket.on("connect", () => {
       // socket.emit("mdm-device-message", {command:"Turn off"});

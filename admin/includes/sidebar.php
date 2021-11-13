@@ -147,7 +147,7 @@
                   <p>Change Password</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="las la-undo-alt nav-icon"></i>
                   <p>Restart</p>
@@ -158,7 +158,7 @@
                   <i class="las la-power-off nav-icon"></i>
                   <p>Shutdown</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -178,16 +178,16 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
               <i class="nav-icon las la-images"></i>
               <p>
                 Image Processing
               </p>
             </a>
-          </li>
-          <li class="nav-header">SETTINGS</li>
-          <li class="nav-item has-treeview">
+          </li> -->
+          <li class="nav-header">PROCESSING</li>
+          <!-- <li class="nav-item has-treeview">
             <a href="index.php" class="nav-link">
               <i class="nav-icon las la-print"></i>
               <p>
@@ -211,6 +211,14 @@
                 </a>
               </li>
             </ul>
+          </li> -->
+          <li class="nav-item">
+            <a href="https://mdm-service.imperialinnovations.co.tz/processing/" class="nav-link">
+              <i class="nav-icon las la-images"></i>
+              <p>
+                Image Processing
+              </p>
+            </a>
           </li>
         </ul>
       </nav>

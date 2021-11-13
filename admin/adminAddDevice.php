@@ -3,8 +3,8 @@
   include('config/dbconn.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
-  include('includes/sidebar.php');
+  include('includes/adminTopbar.php');
+  include('includes/adminSidebar.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -19,7 +19,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
               <li class="breadcrumb-item active">Add Device</li>
             </ol>
           </div><!-- /.col -->
@@ -40,7 +40,7 @@
               </h4>
             </div>
             <div class="card-body">
-              <form action="code.php" method="POST">
+              <form action="adminCode.php" method="POST">
                 <div class="modal-body">
                   <div class="form-group">
                     <label>Device ID</label>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <a href="index.php" class="btn btn-secondary">BACK</a>
+                  <a href="admin.php" class="btn btn-secondary">BACK</a>
                   <button type="submit" name="addDevice" class="btn btn-primary">Save</button>
                 </div>
               </form>

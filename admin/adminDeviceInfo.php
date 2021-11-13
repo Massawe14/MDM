@@ -3,8 +3,8 @@
   include('authentication.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
-  include('includes/sidebar.php');
+  include('includes/adminTopbar.php');
+  include('includes/adminSidebar.php');
   include('config/dbconn.php');
   require_once('socket/socket_client.php');
 ?>
@@ -21,7 +21,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
               <li class="breadcrumb-item active">Registered Devices</li>
             </ol>
           </div><!-- /.col -->
@@ -40,7 +40,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="code.php" method="POST">
+        <form action="adminCode.php" method="POST">
           <div class="modal-body">
             <div class="form-group">
               <label>Device ID</label>
@@ -165,7 +165,7 @@
                               <td><?php echo $row['location_lng']; ?></td> -->
                               <td><?php echo $row['last_used']; ?></td>
                               <td>
-                                <form action="index.php" method="POST">
+                                <form action="admin.php" method="POST">
                                   <input type="hidden" name="display_map" value="<?= $row['device_id']; ?>">
                                   <button type="submit" name="displayMap" class="btn btn-success btn-sm">
                                     View
@@ -173,12 +173,12 @@
                                 </form>
                               </td>
                               <td>
-                                <a href="device-edit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <a href="adminDeviceEdit.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <button type="button" value="<?php echo $row['sn']; ?>" class="btn btn-danger btn-sm deletedevicebtn">Delete</button>
                               </td>
                               <td>
-                                <button onclick="Restart(<?php echo $row['device_id']; ?>);" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
-                                <button onclick="TurnOff(<?php echo $row['device_id']; ?>);" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
+                                <button onclick="Restart();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-warning btn-sm">Restart</button>
+                                <button onclick="TurnOff();" id="device_id" type="button" value="<?php echo $row['device_id']; ?>" class="btn btn-danger btn-sm">Turn off</button>
                               </td>
                             </tr>
                           <?php
@@ -218,8 +218,8 @@
 </script>
 
 <script>
-  function Restart(device_id) {
-    // var device_id = $("#device_id").val();
+  function Restart() {
+    var device_id = $("#device_id").val();
     console.log("Device ID :", device_id);
     var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "RESTART"}}});
     window.dispatchEvent(event);
@@ -227,21 +227,21 @@
 </script>
 
 <script>
-  function TurnOff(device_id) {
-    // var device_id = $("#device_id").val();
+  function TurnOff() {
+    var device_id = $("#device_id").val();
     console.log("Device ID :", device_id);
     var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-message", message: {deviceId: device_id, command: "TURN_OFF"}}});
     window.dispatchEvent(event);
 }
 </script>
 
-<!-- <script>
+<script>
   function TurnOff() {
     var device_id = $("#device_id").val();
     console.log("Device ID :", device_id);
     var event = new CustomEvent("php-event", {detail: {channelId: "mdm-device-all", message: {deviceId: device_id, command: "TURN_OFF"}}});
     window.dispatchEvent(event);
 }
-</script> -->
+</script>
 
 <?php include('includes/footer.php'); ?>

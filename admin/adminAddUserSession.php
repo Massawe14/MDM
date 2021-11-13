@@ -3,8 +3,8 @@
   include('config/dbconn.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
-  include('includes/sidebar.php');
+  include('includes/adminTopbar.php');
+  include('includes/adminSidebar.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -19,8 +19,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Add Device</li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
+              <li class="breadcrumb-item active">Users Sessions</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,12 +36,33 @@
           <div class="card">
             <div class="card-header">
               <h4>
-                Add Device
+                Users Session
               </h4>
             </div>
             <div class="card-body">
-              <form action="code.php" method="POST">
+              <form action="adminCode.php" method="POST">
                 <div class="modal-body">
+                  <div class="form-group">
+                    <label>Session ID</label>
+                    <?php 
+                      $query = "SELECT * FROM main_sessions";
+                      $result = mysqli_query($conn, $query);
+
+                      if (mysqli_num_rows($result) > 0) {
+                        ?>
+                          <select name="session_id" class="form-control">
+                            <?php foreach ($result as $row) { ?>
+                              <option value="<?= $row['session_id'] ?>"><?= $row['session_id'] ?></option>
+                            <?php } ?>
+                          </select>
+                        <?php
+                      } 
+                    ?>
+                  </div>
+                  <div class="form-group">
+                    <label for="">User ID</label>
+                    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID" required/>
+                  </div>
                   <div class="form-group">
                     <label>Device ID</label>
                     <?php 
@@ -50,7 +71,7 @@
 
                       if (mysqli_num_rows($result) > 0) {
                         ?>
-                          <select class="form-control" name="device_id" id="device_id">
+                          <select name="device_id" class="form-control">
                             <?php foreach ($result as $row) { ?>
                               <option value="<?= $row['device_id'] ?>"><?= $row['device_id'] ?></option>
                             <?php } ?>
@@ -59,14 +80,10 @@
                       } 
                     ?>
                   </div>
-                  <div class="form-group">
-                    <label for=""> Device Name </label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Device Name" required/>
-                  </div>
                 </div>
                 <div class="modal-footer">
-                  <a href="index.php" class="btn btn-secondary">BACK</a>
-                  <button type="submit" name="addDevice" class="btn btn-primary">Save</button>
+                  <a href="admin.php" class="btn btn-secondary">BACK</a>
+                  <button type="submit" name="addUserSession" class="btn btn-primary">Save</button>
                 </div>
               </form>
             </div> 

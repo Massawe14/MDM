@@ -3,8 +3,8 @@
   include('config/dbconn.php');
   
   include('includes/header.php');
-  include('includes/topbar.php');
-  include('includes/sidebar.php');
+  include('includes/adminTopbar.php');
+  include('includes/adminSidebar.php');
   require_once('socket/socket_client.php');
 ?>
 
@@ -20,7 +20,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
               <li class="breadcrumb-item active">Users Session</li>
             </ol>
           </div><!-- /.col -->
@@ -39,7 +39,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="code.php" method="POST" enctype="multipart/form-data">
+        <form action="adminCode.php" method="POST" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="form-group">
               <label>Session ID</label>
@@ -126,7 +126,7 @@
                             <td><?= $row['device_id']; ?></td>
                             <td>
                               <form action="code.php" method="POST">
-                                <a href="editUserSession.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
+                                <a href="adminEditUserSession.php?sn=<?php echo $row['sn']; ?>" class="btn btn-info btn-sm">Edit</a>
                                 <input type="hidden" name="delete_sessionusers_id" value="<?= $row['sn']; ?>">
                                 <button type="submit" name="deleteSessionUsers" class="btn btn-danger btn-sm">
                                   Delete
