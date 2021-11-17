@@ -43,25 +43,29 @@
               <form action="adminCode.php" method="POST">
                 <div class="modal-body">
                   <div class="form-group">
-                    <label>Device ID</label>
+                    <label for=""> Device ID </label>
+                    <input type="text" class="form-control" name="device_id" id="device_id" placeholder="Device ID" required/>
+                  </div>
+                  <div class="form-group">
+                    <label for=""> Device Name </label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Device Name" required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Device User</label>
                     <?php 
-                      $query = "SELECT * FROM session_logs";
+                      $query = "SELECT * FROM users";
                       $result = mysqli_query($conn, $query);
 
                       if (mysqli_num_rows($result) > 0) {
                         ?>
-                          <select class="form-control" name="device_id" id="device_id">
+                          <select class="form-control" name="username" id="username">
                             <?php foreach ($result as $row) { ?>
-                              <option value="<?= $row['device_id'] ?>"><?= $row['device_id'] ?></option>
+                              <option value="<?= $row['username'] ?>"><?= $row['username'] ?></option>
                             <?php } ?>
                           </select>
                         <?php
                       } 
                     ?>
-                  </div>
-                  <div class="form-group">
-                    <label for=""> Device Name </label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Device Name" required/>
                   </div>
                 </div>
                 <div class="modal-footer">

@@ -16,8 +16,9 @@
   if (isset($_POST['addDevice'])) {
     $device_id = $_POST['device_id'];
     $name = $_POST['name'];
+    $username = $_POST['username'];
 
-    $query = "INSERT INTO `devices` (`device_id`, `name`) VALUES ('$device_id', '$name')";
+    $query = "INSERT INTO `devices`(`device_id`, `name`, `username`) VALUES ('$device_id', '$name', '$username')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -34,8 +35,9 @@
     $sn = $_POST['sn'];
     $device_id = $_POST['device_id'];
     $name = $_POST['name'];
+    $username = $_POST['username'];
 
-    $query = "UPDATE devices SET device_id='$device_id', name='$name' WHERE sn='$sn'";
+    $query = "UPDATE devices SET device_id='$device_id', name='$name', username='$username' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -49,7 +51,7 @@
   }
 
   if (isset($_POST['DeleteDevicebtn'])) {
-    $device_delete_id = $_POST['delete_device_id'];
+    $device_delete_id = $_POST['delete_device'];
 
     $query = "DELETE FROM devices WHERE sn='$device_delete_id'";
     $result = mysqli_query($conn, $query);

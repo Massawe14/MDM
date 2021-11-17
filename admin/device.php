@@ -43,25 +43,29 @@
         <form action="code.php" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label>Device ID</label>
-              <?php 
-                $query = "SELECT * FROM session_logs";
-                $result = mysqli_query($conn, $query);
-
-                if (mysqli_num_rows($result) > 0) {
-                  ?>
-                    <select name="device_id" class="form-control">
-                      <?php foreach ($result as $row) { ?>
-                        <option value="<?= $row['device_id'] ?>"><?= $row['device_id'] ?></option>
-                      <?php } ?>
-                    </select>
-                  <?php
-                } 
-              ?>
+              <label for=""> Device ID </label>
+              <input type="text" class="form-control" name="device_id" id="device_id" placeholder="Device ID" required/>
             </div>
             <div class="form-group">
               <label for=""> Device Name </label>
               <input type="text" class="form-control" name="name" id="name" placeholder="Device Name" required/>
+            </div>
+            <div class="form-group">
+              <label>Device User</label>
+              <?php 
+                  $query = "SELECT * FROM users";
+                  $result = mysqli_query($conn, $query);
+
+                  if (mysqli_num_rows($result) > 0) {
+                    ?>
+                      <select class="form-control" name="username" id="username">
+                        <?php foreach ($result as $row) { ?>
+                          <option value="<?= $row['username'] ?>"><?= $row['username'] ?></option>
+                        <?php } ?>
+                      </select>
+                    <?php
+                  } 
+                ?>
             </div>
           </div>
           <div class="modal-footer">
@@ -123,6 +127,7 @@
                       <th>SN</th>
                       <th>Device ID</th>
                       <th>Device Name</th>
+                      <th>Device User</th>
                       <th>Date Created</th>
                       <th>Battery Level</th>
                       <th>Battery Charging</th>
@@ -146,6 +151,7 @@
                               <td><?php  echo $row['sn']; ?></td>
                               <td><?php  echo $row['device_id']; ?></td>
                               <td><?php  echo $row['name']; ?></td>
+                              <td><?php  echo $row['username']; ?></td>
                               <td><?php  echo $row['date_created']; ?></td>
                               <td><?php  echo $row['battery_level']; ?></td>
                               <td>

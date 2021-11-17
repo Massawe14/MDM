@@ -41,6 +41,23 @@
                           <label for="">Device Name</label>
                           <input type="text" name="name" value="<?= $row['name'] ?>" class="form-control" required>
                         </div>
+                        <div class="form-group">
+                          <label>Device User</label>
+                          <?php 
+                            $query = "SELECT * FROM users";
+                            $result = mysqli_query($conn, $query);
+
+                            if (mysqli_num_rows($result) > 0) {
+                              ?>
+                                <select class="form-control" name="username" id="username">
+                                  <?php foreach ($result as $row) { ?>
+                                    <option value="<?= $row['username'] ?>"><?= $row['username'] ?></option>
+                                  <?php } ?>
+                                </select>
+                              <?php
+                            } 
+                          ?>
+                        </div>
                       </div>
                       <div class="modal-footer">
                         <a href="device.php" class="btn btn-secondary">BACK</a>
