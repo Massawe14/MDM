@@ -51,6 +51,10 @@
         header('Location: login.php');
       }
     }
+    else{
+      $_SESSION['status'] = "You are not Authorized as Admin";
+      header('Location: login.php');
+    }
   }
   else{
   	$_SESSION['status'] = "Access Denied";
