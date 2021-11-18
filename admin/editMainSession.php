@@ -60,6 +60,14 @@
                                   <label for="">Session Name</label>
                                   <input type="text" class="form-control" name="name" id="name" placeholder="Session Name" required value="<?php echo $row['name']; ?>" />
                                 </div>
+                                <div class="form-group">
+                                  <label for="">Start Time</label>
+                                  <input type="datetime-local" class="form-control" name="start_time" id="start_time" placeholder="Start Time" required value="<?php echo $row['start_time']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                  <label for="">End Time</label>
+                                  <input type="datetime-local" class="form-control" name="end_time" id="end_time" placeholder="End Time" required value="<?php echo $row['end_time']; ?>" />
+                                </div>
                               <?php
                             }
                           }
