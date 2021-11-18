@@ -50,6 +50,14 @@
                     <label for=""> Session Name </label>
                     <input type="text" class="form-control" name="name" id="name" placeholder="Session Name" required/>
                   </div>
+                  <div class="form-group">
+                    <label for=""> Start Time </label>
+                    <input type="datetime-local" class="form-control" name="start_time" id="start_time" placeholder="Start Time" required/>
+                  </div>
+                  <div class="form-group">
+                    <label for=""> End Time </label>
+                    <input type="datetime-local" class="form-control" name="end_time" id="end_time" placeholder="End Time" required/>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <a href="admin.php" class="btn btn-secondary">BACK</a>

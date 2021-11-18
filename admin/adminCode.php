@@ -252,8 +252,10 @@
   if (isset($_POST['addSession'])) {
     $session_id = $_POST['session_id'];
     $name = $_POST['name'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
 
-    $query = "INSERT INTO `main_sessions` (`session_id`, `name`) VALUES ('$session_id', '$name')";
+    $query = "INSERT INTO `main_sessions` (`session_id`, `name`, `start_time`, `end_time`) VALUES ('$session_id', '$name', '$start_time', '$end_time')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
@@ -270,8 +272,10 @@
     $sn = $_POST['sn'];
     $session_id = $_POST['session_id'];
     $name = $_POST['name'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
 
-    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name' WHERE sn='$sn'";
+    $query = "UPDATE main_sessions SET session_id='$session_id', name='$name', start_time='$start_time', end_time='$end_time' WHERE sn='$sn'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
