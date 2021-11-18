@@ -140,7 +140,6 @@
                   <thead>
                     <tr>
                       <th>SN</th>
-                      <th>ID</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Username</th>
@@ -160,7 +159,6 @@
                           ?>
                             <tr>
                               <td><?php  echo $row['sn']; ?></td>
-                              <td><?php  echo $row['id']; ?></td>
                               <td><?php  echo $row['first_name']; ?></td>
                               <td><?php  echo $row['last_name']; ?></td>
                               <td><?php  echo $row['username']; ?></td>

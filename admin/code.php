@@ -465,28 +465,27 @@
   // if (isset($_POST['changePassword'])) {
 
   //   // there are no errors so let's get data from the form
-  //   $username = $_POST['username'];
-  //   $old_password = $_POST['old_password'];
-  //   $new_password = $_POST['new_password'];
-  //   $confirm_password = $_POST['confirm_password'];
+  //   $username = trim($_POST['username']);
+  //   $old_password = trim($_POST['old_password']);
+  //   $new_password = trim($_POST['new_password']);
+  //   $confirm_password = trim($_POST['confirm_password']);
 
   //   // password encryption
   //   $password_encrypt = password_hash($new_password, PASSWORD_DEFAULT);
 
-  //   $query = "SELECT password_hash FROM admin where username='$username'";
+  //   $query = "SELECT * FROM admin WHERE username='$username' LIMIT 1";
   //   $result = mysqli_query($conn, $query);
-  //   $row = mysqli_num_rows($result)
+  //   $row = mysqli_fetch_assoc($result);
 
   //   if (password_verify($old_password, $row['password_hash'])) {
 
-  //     if (password_verify($confirm_password, $password_encrypt)) {
+  //     if (password_verify($confirmpassword, $password_encrypt)) {
+  //       $change = "UPDATE `admin` SET password_hash='$password_encrypt' WHERE username='$username'";
+  //       $result_change = mysqli_query($conn, $change);
 
-  //       $query = "UPDATE `admin` SET password_hash='$password_encrypt' WHERE username=$username";
-  //       $result = mysqli_query($conn, $query);
-
-  //       if ($result) {
+  //       if ($result_change) {
   //         $_SESSION['status'] = "Password Changed Successfully";
-  //         header("Location: registeradmin.php");
+  //         header("Location: change-password.php");
   //       }
   //       else{
   //         $_SESSION['status'] = "Password Changing Failed";
@@ -503,5 +502,5 @@
   //     header("Location: change-password.php");
   //   }
   // }
-
 ?>
+        
