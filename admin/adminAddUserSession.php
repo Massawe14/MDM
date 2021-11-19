@@ -79,7 +79,7 @@
                   <div class="form-group">
                     <label>Device ID</label>
                     <?php 
-                      $query = "SELECT * FROM session_logs";
+                      $query = "SELECT * FROM devices";
                       $result = mysqli_query($conn, $query);
 
                       if (mysqli_num_rows($result) > 0) {
