@@ -60,8 +60,21 @@
                     ?>
                   </div>
                   <div class="form-group">
-                    <label for="">User ID</label>
-                    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID" required/>
+                    <label>User ID</label>
+                    <?php 
+                      $query = "SELECT * FROM users";
+                      $result = mysqli_query($conn, $query);
+
+                      if (mysqli_num_rows($result) > 0) {
+                        ?>
+                          <select name="user_id" class="form-control">
+                            <?php foreach ($result as $row) { ?>
+                              <option value="<?= $row['username'] ?>"><?= $row['username'] ?></option>
+                            <?php } ?>
+                          </select>
+                        <?php
+                      } 
+                    ?>
                   </div>
                   <div class="form-group">
                     <label>Device ID</label>
