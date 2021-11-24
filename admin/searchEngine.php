@@ -6,7 +6,10 @@
   	
   	$input = $_POST['input'];
 
-  	$query = "SELECT * FROM users WHERE username LIKE '{$input}%' OR first_name LIKE '{$input}%' OR last_name LIKE '{$input}%' OR email LIKE '{$input}%' LIMIT 3";
+  	$query = "SELECT * 
+  	          FROM users 
+  	               INNER JOIN devices USING (username)
+  	          WHERE username LIKE '{$input}%' OR first_name LIKE '{$input}%' OR last_name LIKE '{$input}%' OR email LIKE '{$input}%' OR device_id LIKE '{$input}%' OR name LIKE '{$input}%'";
 
   	$result = mysqli_query($conn, $query);
 
@@ -20,6 +23,8 @@
   					<th>Lastname</th>
   					<th>Username</th>
   					<th>Email</th>
+  					<th>Device ID</th>
+  					<th>Device Name</th>
   				</tr>
   			</thead>
   			<tbody>
@@ -31,6 +36,8 @@
   				  	$lastname = $row['last_name'];
   				  	$username = $row['username'];
   				  	$email = $row['email'];
+  				  	$device_id = $row['device_id'];
+  				  	$name = $row['name'];
 
   				  	?>
 
@@ -40,6 +47,8 @@
   				  	  	<td><?php echo $lastname; ?></td>
   				  	  	<td><?php echo $username; ?></td>
   				  	  	<td><?php echo $email; ?></td>
+  				  	  	<td><?php echo $device_id; ?></td>
+  				  	  	<td><?php echo $name; ?></td>
   				  	  </tr>
 
   				  	<?php
