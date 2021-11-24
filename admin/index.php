@@ -123,6 +123,8 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
+    <!-- Search content -->
+    <div class="container-fluid" id="searchresult"></div>
     <!-- Map content -->
     <div class="container-fluid">
       <div class="row mb-2">
