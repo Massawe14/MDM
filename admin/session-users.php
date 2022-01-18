@@ -59,9 +59,26 @@
               ?>
             </div>
             <div class="form-group">
+              <label>User ID</label>
+              <?php 
+                $query = "SELECT * FROM users";
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) > 0) {
+                  ?>
+                    <select name="user_id" class="form-control">
+                      <?php foreach ($result as $row) { ?>
+                        <option value="<?= $row['username'] ?>"><?= $row['username'] ?></option>
+                      <?php } ?>
+                    </select>
+                  <?php
+                } 
+              ?>
+            </div>
+            <!-- <div class="form-group">
               <label for="">User ID</label>
               <input type="text" class="form-control" name="user_id" id="user_id" placeholder="User ID" required/>
-            </div>
+            </div> -->
             <div class="form-group">
               <label>Device ID</label>
               <?php 
@@ -82,7 +99,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="addUsersession" class="btn btn-primary">Save</button>
+            <button type="submit" name="addUserSession" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>

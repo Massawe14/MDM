@@ -8,7 +8,7 @@
 
   	$query = "SELECT * 
   	          FROM users 
-  	               INNER JOIN devices USING (username)
+  	           INNER JOIN devices USING (username)
   	          WHERE username LIKE '{$input}%' OR first_name LIKE '{$input}%' OR last_name LIKE '{$input}%' OR email LIKE '{$input}%' OR device_id LIKE '{$input}%' OR name LIKE '{$input}%'";
 
   	$result = mysqli_query($conn, $query);
